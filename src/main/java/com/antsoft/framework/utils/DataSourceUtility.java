@@ -13,8 +13,13 @@ import javax.sql.DataSource;
  * Created by sunlin05 on 2015/1/29.
  */
 public class DataSourceUtility {
-    public static DataSource getEmbeddedHsqlDataSource(String script) {
-        return getEmbeddedHsqlDataSource(new String[]{script});
+    public static DataSource getEmbeddedH2DataSource(String ... scripts) {
+        EmbeddedDatabaseBuilder embeddedDatabaseBuilder = new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.H2).setScriptEncoding("utf8").addScript("classpath:db/h2_init.sql");;
+        for (String script : scripts) {
+            embeddedDatabaseBuilder.addScript(script);
+        }
+        return embeddedDatabaseBuilder.build();
     }
 
     public static DataSource getEmbeddedHsqlDataSource(String ... scripts) {
