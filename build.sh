@@ -17,7 +17,7 @@ mkdir output
 mkdir output/bin
 mkdir output/conf
 
-cp fp-invoice-service/target/fp-invoice-service-version.jar output/bin
+cp target/yecai-service-1.0-SNAPSHOT.jar output/bin
 
 deploy_dir=deploy
 
