@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antsoft.yecai.mapper.UserMapper">
+    <select id="count" resultType="int">
+        SELECT count(*) FROM v1_users
+    </select>
+
+    <delete id="clear">
+        DELETE FROM v1_users
+    </delete>
+
+    <insert id="create">
+        INSERT INTO v1_users(user_id, user_name, lv, exp, remark, vip)
+        VALUES(#{userId}, #{user_name}, #{lv}, #{exp}, #{remark}, #{vip})
+    </insert>
+</mapper>

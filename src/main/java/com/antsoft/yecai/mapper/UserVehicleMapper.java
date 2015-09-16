@@ -1,5 +1,7 @@
 package com.antsoft.yecai.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -9,4 +11,5 @@ public interface UserVehicleMapper {
     int count();
     void clear();
     List<String> getVehicles(String userId);
+    void create(@Param("userId") String userId, @Param("vehicle") String vehicle);
 }

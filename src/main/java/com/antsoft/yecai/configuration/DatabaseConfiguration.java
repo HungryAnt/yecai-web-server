@@ -7,6 +7,7 @@ import com.antsoft.framework.datetime.DateTimeTypeHandler;
 import com.antsoft.framework.utils.DataSourceUtility;
 import com.antsoft.yecai.mapper.UserMapper;
 import com.antsoft.yecai.mapper.UserVehicleMapper;
+import com.antsoft.yecai.model.User;
 import com.antsoft.yecai.model.UserVehicle;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -51,8 +52,8 @@ public class DatabaseConfiguration {
         if (databaseIsEmbedded) {
             dataSource = DataSourceUtility.getEmbeddedH2DataSource("classpath:db/yecai_h2.sql");
         } else {
-            dataSource =
-                    DataSourceUtility.getTomcatPoolingDataSource(databaseUrl, databaseUsername, databasePassword);
+            dataSource = DataSourceUtility.getTomcatPoolingDataSource(
+                    databaseUrl, databaseUsername, databasePassword);
         }
         return dataSource;
     }
@@ -63,7 +64,7 @@ public class DatabaseConfiguration {
         sqlSessionFactoryBean.setDataSource(dataSource());
         Class[] types = new Class[] {
             DateTimeTypeHandler.class,
-            UserVehicle.class
+            UserVehicle.class, User.class
         };
 
         sqlSessionFactoryBean.setTypeAliases(types);

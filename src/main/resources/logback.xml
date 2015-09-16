@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="com.antsoft" level="DEBUG"/>
+
+    <include resource="logging/logback-base.xml"/>
+</configuration>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.baidu.bce.finance.invoice.mapper.UserVehicleMapper">
+<mapper namespace="com.antsoft.yecai.mapper.UserVehicleMapper">
     <select id="count" resultType="int">
         SELECT count(*) FROM v1_user_vehicles
     </select>
@@ -15,4 +15,8 @@
         INSERT INTO v1_user_vehicles(user_id, vehicle)
         VALUES(#{userId}, #{vehicle})
     </insert>
+
+    <select id="getVehicles" resultType="String">
+        SELECT vehicle FROM v1_user_vehicles WHERE user_id = #{userId}
+    </select>
 </mapper>

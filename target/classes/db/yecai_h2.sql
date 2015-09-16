@@ -7,7 +7,7 @@ CREATE TABLE `v1_users` (
   `exp` int(11) NOT NULL DEFAULT '0',
   `remark` varchar(64) NOT NULL DEFAULT '',
   `vip` tinyint(4) NOT NULL DEFAULT '0',
-  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_v1_users_user_id` (`user_id`)
 );

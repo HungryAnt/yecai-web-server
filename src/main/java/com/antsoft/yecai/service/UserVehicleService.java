@@ -20,12 +20,17 @@ public class UserVehicleService {
 
     private Random random = new Random();
 
+    public void clear() {
+        userVehicleMapper.clear();
+    }
+
     public void gift(String userId) {
-        int level = userService.getUserLevel(userId);
+        int level = userService.getLevel(userId);
         if (level < 30) {
             return;
         }
-
+        String vehicle = randomVehicle();
+        create(userId, vehicle);
     }
 
     public List<String> getVehicles(String userId) {
@@ -37,4 +42,9 @@ public class UserVehicleService {
         int num = random.nextInt(nums.length);
         return String.format("vehicle_%s", num);
     }
+
+    public void create(String userId, String vehicle) {
+        userVehicleMapper.create(userId, vehicle);
+    }
+
 }
