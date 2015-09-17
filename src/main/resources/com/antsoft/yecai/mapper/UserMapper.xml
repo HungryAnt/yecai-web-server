@@ -15,4 +15,8 @@
         INSERT INTO v1_users(user_id, user_name, lv, exp, remark, vip)
         VALUES(#{userId}, #{user_name}, #{lv}, #{exp}, #{remark}, #{vip})
     </insert>
+
+    <select id="getLevel" resultType="int">
+        SELECT lv FROM v1_users WHERE user_id = #{userId}
+    </select>
 </mapper>
