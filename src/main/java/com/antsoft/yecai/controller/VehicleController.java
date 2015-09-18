@@ -14,11 +14,20 @@ public class VehicleController {
     @Autowired
     private UserVehicleService userVehicleService;
 
-    @Autowired
-    private UserService userService;
-
     @RequestMapping(value = "/gift", method = RequestMethod.POST)
-    public void gift(@RequestParam(value = "user_id") String userId) {
+    public void gift(@RequestParam(value = "userId") String userId) {
         userVehicleService.gift(userId);
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public void create(@RequestParam(value = "userId") String userId,
+                       @RequestParam(value = "num", required = false, defaultValue = "-1") int num) {
+        String vehicle;
+        if (num == -1) {
+            vehicle = userVehicleService.randomVehicle();
+        } else {
+            vehicle = userVehicleService.toVehicle(num);
+        }
+        userVehicleService.create(userId, vehicle);
     }
 }

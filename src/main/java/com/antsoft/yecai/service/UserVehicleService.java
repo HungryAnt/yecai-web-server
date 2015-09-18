@@ -37,7 +37,7 @@ public class UserVehicleService {
         return userVehicleMapper.getVehicles(userId);
     }
 
-    private String randomVehicle() {
+    public String randomVehicle() {
         int[] nums = {39, 40, 50, 58, 59, 67, 74, 75, 81, 82, 83, 89, 90, 91};
         int index = random.nextInt(nums.length);
         return String.format("vehicle_%s", nums[index]);
@@ -47,4 +47,7 @@ public class UserVehicleService {
         userVehicleMapper.create(userId, vehicle);
     }
 
+    public String toVehicle(int num) {
+        return "vehicle_" + num;
+    }
 }

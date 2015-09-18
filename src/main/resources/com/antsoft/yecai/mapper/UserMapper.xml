@@ -3,6 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.antsoft.yecai.mapper.UserMapper">
+    <sql id="columns">user_id, user_name, lv, exp, remark, vip</sql>
+
     <select id="count" resultType="int">
         SELECT count(*) FROM v1_users
     </select>
@@ -11,12 +13,26 @@
         DELETE FROM v1_users
     </delete>
 
-    <insert id="create">
-        INSERT INTO v1_users(user_id, user_name, lv, exp, remark, vip)
-        VALUES(#{userId}, #{user_name}, #{lv}, #{exp}, #{remark}, #{vip})
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO v1_users(<include refid="columns"/>)
+        VALUES(#{userId}, #{userName}, #{lv}, #{exp}, #{remark}, #{vip})
     </insert>
+
+    <select id="getByUserId" resultMap="user">
+        SELECT <include refid="columns"/>, mtime FROM v1_users
+        WHERE user_id = #{userId}
+    </select>
 
     <select id="getLevel" resultType="int">
         SELECT lv FROM v1_users WHERE user_id = #{userId}
+    </select>
+
+    <resultMap id="user" type="User">
+        <result column="mtime" property="mtime" typeHandler="DateTimeTypeHandler"/>
+    </resultMap>
+
+    <select id="findByUserName" resultMap="user">
+        SELECT <include refid="columns"/>, mtime FROM v1_users
+        WHERE user_name LIKE CONCAT(CONCAT('%',#{userName}),'%')
     </select>
 </mapper>
