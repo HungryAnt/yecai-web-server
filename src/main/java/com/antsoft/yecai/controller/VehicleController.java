@@ -30,4 +30,9 @@ public class VehicleController {
         }
         userVehicleService.create(userId, vehicle);
     }
+
+    @RequestMapping(value = "/getVehicles", method = RequestMethod.GET)
+    public void getVehicles(@RequestParam(value = "userId") String userId) {
+        userVehicleService.getVehicles(userId);
+    }
 }
