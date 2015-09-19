@@ -23,7 +23,7 @@ public class GameService {
         try {
             Runtime.getRuntime().exec(
                     String.format(
-                            "cd \"%s\" && sh stop_server.sh && sh start_server.sh", gameDeployPath));
+                            "cd %s && sh stop_server.sh && sh start_server.sh", gameDeployPath));
         } catch (IOException e) {
             logger.error("restart failed", e);
         }
