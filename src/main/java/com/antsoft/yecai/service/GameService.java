@@ -24,7 +24,7 @@ public class GameService {
             String cmd = String.format(
                     "cd %s && sh stop_server.sh && sh start_server.sh", gameDeployPath);
             logger.info("begin run cmd: {}", cmd);
-            Runtime.getRuntime().exec(cmd);
+            Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", cmd}, null, null);
         } catch (IOException e) {
             logger.error("restart failed", e);
             throw new RuntimeException(e);
