@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class GameService {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Value("gameDeployPath")
+    @Value("${gameDeployPath}")
     private String gameDeployPath;
 
     public void restart() {
