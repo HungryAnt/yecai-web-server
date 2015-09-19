@@ -21,11 +21,13 @@ public class GameService {
 
     public void restart() {
         try {
-            Runtime.getRuntime().exec(
-                    String.format(
-                            "cd %s && sh stop_server.sh && sh start_server.sh", gameDeployPath));
+            String cmd = String.format(
+                    "cd %s && sh stop_server.sh && sh start_server.sh", gameDeployPath);
+            logger.info("begin run cmd: {}", cmd);
+            Runtime.getRuntime().exec(cmd);
         } catch (IOException e) {
             logger.error("restart failed", e);
+            throw new RuntimeException(e);
         }
     }
 }
