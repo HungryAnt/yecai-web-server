@@ -20,3 +20,13 @@ CREATE TABLE `v1_user_vehicles` (
   PRIMARY KEY (`id`),
   KEY `idx_v1_user_vehicles_user_id` (`user_id`)
 );
+
+DROP TABLE IF EXISTS `v1_accounts`;
+CREATE TABLE `v1_accounts` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `amount` bigint(20) NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_v1_accounts_user_id` (`user_id`)
+);
