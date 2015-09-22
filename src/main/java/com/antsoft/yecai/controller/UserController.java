@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/findByUserName", method = RequestMethod.POST)
+    @RequestMapping(value = "/findByUserName", method = RequestMethod.GET)
     public List<User> findByUserName(@RequestParam(value = "userName") String userName) {
         return userService.findByUserName(userName);
     }
