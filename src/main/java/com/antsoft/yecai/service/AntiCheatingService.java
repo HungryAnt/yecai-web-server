@@ -31,10 +31,19 @@ public class AntiCheatingService {
 
     public boolean checkCheating(String userId, long clientTimestampInS) {
         TimestampPair timestampPair = userClientTimestampMap.get(userId);
+        if (timestampPair == null) {
+            initClientTimestamp(userId, clientTimestampInS);
+            return false;
+        }
+
         long serverTimestampInS = getServerTimestampInS();
 
         long clientDiff = clientTimestampInS - timestampPair.getClientTimestampInS();
-        if (clientDiff <= 0) {
+        if (clientDiff == 0) {
+            return false;
+        }
+
+        if (clientDiff < 0) {
             throw new RuntimeException("wrong clientDiff, current: " + clientTimestampInS
                     + "last: " + timestampPair.getClientTimestampInS());
         }
