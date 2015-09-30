@@ -30,3 +30,12 @@ CREATE TABLE `v1_accounts` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_v1_accounts_user_id` (`user_id`)
 );
+
+DROP TABLE IF EXISTS `v1_cheating_users`;
+CREATE TABLE `v1_cheating_users` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `speed_up_rate` decimal(15,2) NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);

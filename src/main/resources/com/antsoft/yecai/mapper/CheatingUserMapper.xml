@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antsoft.yecai.mapper.CheatingUserMapper">
+    <select id="count" resultType="int">
+        SELECT count(*) FROM v1_cheating_users
+    </select>
+
+    <delete id="clear">
+        DELETE FROM v1_cheating_users
+    </delete>
+
+    <insert id="add">
+        INSERT INTO v1_cheating_users(user_id, speed_up_rate)
+        VALUES(#{userId}, #{speedUpRate})
+    </insert>
+</mapper>

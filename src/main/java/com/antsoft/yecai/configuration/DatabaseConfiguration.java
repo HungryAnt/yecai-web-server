@@ -6,6 +6,7 @@ package com.antsoft.yecai.configuration;
 import com.antsoft.framework.datetime.DateTimeTypeHandler;
 import com.antsoft.framework.utils.DataSourceUtility;
 import com.antsoft.yecai.mapper.AccountMapper;
+import com.antsoft.yecai.mapper.CheatingUserMapper;
 import com.antsoft.yecai.mapper.UserMapper;
 import com.antsoft.yecai.mapper.UserVehicleMapper;
 import com.antsoft.yecai.model.User;
@@ -98,5 +99,10 @@ public class DatabaseConfiguration {
     @Bean
     public MapperFactoryBean accountMapper() {
         return getMapper(AccountMapper.class);
+    }
+
+    @Bean
+    public MapperFactoryBean cheatingUserMapper() {
+        return getMapper(CheatingUserMapper.class);
     }
 }
