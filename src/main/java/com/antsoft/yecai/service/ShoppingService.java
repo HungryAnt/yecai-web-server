@@ -3,7 +3,9 @@ package com.antsoft.yecai.service;
 import com.antsoft.framework.model.PageResult;
 import com.antsoft.framework.utils.PageUtility;
 import com.antsoft.yecai.mapper.Goods;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,12 @@ import java.util.List;
  */
 @Service
 public class ShoppingService {
+    @Autowired
+    private AccountService accountService;
+
+    @Autowired
+    private UserVehicleService userVehicleService;
+
     private List<Goods> allVehicles;
 
     public ShoppingService() {
@@ -55,7 +63,28 @@ public class ShoppingService {
 
     public PageResult<Goods> getVehicles(int pageNo, int pageSize) {
         int offset = PageUtility.getOffset(pageNo, pageSize);
-        List<Goods> vehicles = allVehicles.subList(offset, offset + pageSize);
+        int toIndex = Math.min(offset + pageSize, allVehicles.size());
+        List<Goods> vehicles = allVehicles.subList(offset, toIndex);
         return PageResult.createResponse(vehicles, allVehicles.size(), pageNo, pageSize);
+    }
+
+    @Transactional
+    public void buy(String userId, String key) {
+        Goods goods = findGoods(key);
+        long price = goods.getPrice();
+        long amount = accountService.getAmountForUpdate(userId);
+        if (amount >= price) {
+            accountService.decreaseAmount(userId, price);
+            userVehicleService.create(userId, key);
+        }
+    }
+
+    private Goods findGoods(String key) {
+        for (Goods goods : allVehicles) {
+            if (goods.getKey().equals(key)) {
+                return goods;
+            }
+        }
+        throw new IllegalArgumentException("wrong key:" + key);
     }
 }

@@ -31,6 +31,16 @@ CREATE TABLE `v1_accounts` (
   UNIQUE KEY `idx_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `v1_user_rubbishes`;
+CREATE TABLE `v1_user_rubbishes` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `type_id` smallint(6) NOT NULL,
+  `count` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_user_id_type_id` (`user_id`,`type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `v1_cheating_users`;
 CREATE TABLE `v1_cheating_users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,

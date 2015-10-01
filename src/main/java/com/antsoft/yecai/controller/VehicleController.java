@@ -1,9 +1,13 @@
 package com.antsoft.yecai.controller;
 
-import com.antsoft.yecai.service.UserService;
 import com.antsoft.yecai.service.UserVehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Created by ant on 2015/9/14.
@@ -32,7 +36,7 @@ public class VehicleController {
     }
 
     @RequestMapping(value = "/getVehicles", method = RequestMethod.GET)
-    public void getVehicles(@RequestParam(value = "userId") String userId) {
-        userVehicleService.getVehicles(userId);
+    public List<String> getVehicles(@RequestParam(value = "userId") String userId) {
+        return userVehicleService.getVehicles(userId);
     }
 }

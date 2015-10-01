@@ -26,4 +26,10 @@ public class ShoppingController {
             @RequestParam(value = "pageSize", required = false, defaultValue = "6") int pageSize) {
         return shoppingService.getVehicles(pageNo, pageSize);
     }
+
+    @RequestMapping(value = "/buy", method = RequestMethod.POST)
+    public void buy(@RequestParam("userId") String userId,
+                    @RequestParam("key") String key) {
+        shoppingService.buy(userId, key);
+    }
 }

@@ -4,6 +4,7 @@ import com.antsoft.yecai.mapper.AccountMapper;
 import com.antsoft.yecai.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by ant on 2015/9/15.
@@ -29,10 +30,24 @@ public class AccountService {
     }
 
     public long getAmount(String userId) {
-        int count = accountMapper.countByUserId(userId);
-        if (count == 0) {
+        if (accountMapper.countByUserId(userId) == 0) {
             return 0;
         }
         return accountMapper.getAmount(userId);
+    }
+
+    public long getAmountForUpdate(String userId) {
+        if (accountMapper.countByUserId(userId) == 0) {
+            return 0;
+        }
+        return accountMapper.getAmountForUpdate(userId);
+    }
+
+    public void decreaseAmount(String userId, long amount) {
+        accountMapper.decreaseAmount(userId, amount);
+    }
+
+    public void increaseAmount(String userId, long amount) {
+        accountMapper.increaseAmount(userId, amount);
     }
 }

@@ -21,6 +21,16 @@ CREATE TABLE `v1_user_vehicles` (
   KEY `idx_v1_user_vehicles_user_id` (`user_id`)
 );
 
+DROP TABLE IF EXISTS `v1_user_rubbishes`;
+CREATE TABLE `v1_user_rubbishes` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `type_id` smallint(6) NOT NULL,
+  `count` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_v1_user_rubbishes_user_id_type_id` (`user_id`,`type_id`)
+);
+
 DROP TABLE IF EXISTS `v1_accounts`;
 CREATE TABLE `v1_accounts` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,

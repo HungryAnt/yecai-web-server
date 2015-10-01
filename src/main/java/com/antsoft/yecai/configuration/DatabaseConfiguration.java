@@ -5,10 +5,7 @@ package com.antsoft.yecai.configuration;
 
 import com.antsoft.framework.datetime.DateTimeTypeHandler;
 import com.antsoft.framework.utils.DataSourceUtility;
-import com.antsoft.yecai.mapper.AccountMapper;
-import com.antsoft.yecai.mapper.CheatingUserMapper;
-import com.antsoft.yecai.mapper.UserMapper;
-import com.antsoft.yecai.mapper.UserVehicleMapper;
+import com.antsoft.yecai.mapper.*;
 import com.antsoft.yecai.model.User;
 import com.antsoft.yecai.model.UserVehicle;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -104,5 +101,10 @@ public class DatabaseConfiguration {
     @Bean
     public MapperFactoryBean cheatingUserMapper() {
         return getMapper(CheatingUserMapper.class);
+    }
+
+    @Bean
+    public MapperFactoryBean rubbishMapper() {
+        return getMapper(RubbishMapper.class);
     }
 }

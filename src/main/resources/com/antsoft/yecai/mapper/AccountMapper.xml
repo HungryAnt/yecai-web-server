@@ -26,6 +26,18 @@
         SELECT amount FROM v1_accounts WHERE user_id = #{userId}
     </select>
 
+    <select id="getAmountForUpdate" resultType="long">
+        SELECT amount FROM v1_accounts WHERE user_id = #{userId} FOR UPDATE
+    </select>
+
+    <update id="decreaseAmount">
+        UPDATE v1_accounts SET amount = amount - #{amount} WHERE user_id = #{userId}
+    </update>
+
+    <update id="increaseAmount">
+        UPDATE v1_accounts SET amount = amount + #{amount} WHERE user_id = #{userId}
+    </update>
+
     <!--<resultMap id="account" type="Account">-->
         <!--<result column="mtime" property="mtime" typeHandler="DateTimeTypeHandler"/>-->
     <!--</resultMap>-->
