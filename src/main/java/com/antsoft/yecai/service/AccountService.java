@@ -21,16 +21,10 @@ public class AccountService {
         accountMapper.clear();
     }
 
-    public void updateAmount(String userId, long amount) {
-        if (accountMapper.countByUserId(userId) == 0) {
-            Account account = new Account();
-            account.setUserId(userId);
-            account.setAmount(amount);
-            accountMapper.create(account);
-        } else {
-            accountMapper.updateAmount(userId, amount);
-        }
-    }
+//    public void updateAmount(String userId, long amount) {
+//        ensureAmountExists(userId);
+//        accountMapper.updateAmount(userId, amount);
+//    }
 
     public long getAmount(String userId) {
         if (accountMapper.countByUserId(userId) == 0) {
@@ -47,10 +41,12 @@ public class AccountService {
     }
 
     public void decreaseAmount(String userId, long amount) {
+        ensureAmountExists(userId);
         accountMapper.decreaseAmount(userId, amount);
     }
 
     public void increaseAmount(String userId, long amount) {
+        ensureAmountExists(userId);
         accountMapper.increaseAmount(userId, amount);
     }
 
@@ -58,5 +54,14 @@ public class AccountService {
     public void recharge(String userId, long amount) {
         increaseAmount(userId, amount);
         recordService.createRechargeRecord(userId, amount);
+    }
+
+    private void ensureAmountExists(String userId) {
+        if (accountMapper.countByUserId(userId) == 0) {
+            Account account = new Account();
+            account.setUserId(userId);
+            account.setAmount(0);
+            accountMapper.create(account);
+        }
     }
 }

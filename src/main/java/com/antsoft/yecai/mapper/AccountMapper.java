@@ -11,7 +11,7 @@ public interface AccountMapper {
     void create(Account account);
     int countByUserId(String userId);
     long getAmount(String userId);
-    void updateAmount(@Param("userId") String userId, @Param("amount") long amount);
+//    void updateAmount(@Param("userId") String userId, @Param("amount") long amount);
     void decreaseAmount(@Param("userId") String userId, @Param("amount") long amount);
     void increaseAmount(@Param("userId") String userId, @Param("amount") long amount);
     long getAmountForUpdate(String userId);
