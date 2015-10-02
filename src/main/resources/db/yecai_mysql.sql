@@ -49,7 +49,7 @@ CREATE TABLE `v1_cheating_users` (
   `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idx_user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `v1_goods_payment_records`;
 CREATE TABLE `v1_goods_payment_records` (
@@ -68,7 +68,17 @@ CREATE TABLE `v1_rubbish_recycle_records` (
   `user_id` varchar(64) NOT NULL,
   `rubbish_count` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
-  `mtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `v1_recharge_records`;
+CREATE TABLE `v1_recharge_records` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idx_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

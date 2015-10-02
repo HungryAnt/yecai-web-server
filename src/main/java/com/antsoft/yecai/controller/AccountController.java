@@ -26,4 +26,10 @@ public class AccountController {
                              @RequestParam(value = "amount") long amount) {
         accountService.updateAmount(userId, amount);
     }
+
+    @RequestMapping(value = "/recharge", method = RequestMethod.POST)
+    public void recharge(@RequestParam(value = "userId") String userId,
+                         @RequestParam(value = "amount") long amount) {
+        accountService.recharge(userId, amount);
+    }
 }

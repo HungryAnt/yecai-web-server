@@ -48,7 +48,7 @@ CREATE TABLE `v1_cheating_users` (
   `speed_up_rate` decimal(15,2) NOT NULL,
   `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `idx_user_id` (`user_id`)
+  KEY `idx_v1_cheating_users_user_id` (`user_id`)
 );
 
 DROP TABLE IF EXISTS `v1_goods_payment_records`;
@@ -68,7 +68,17 @@ CREATE TABLE `v1_rubbish_recycle_records` (
   `user_id` varchar(64) NOT NULL,
   `rubbish_count` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
-  `mtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idx_v1_rubbish_recycle_records_user_id` (`user_id`)
+);
+
+DROP TABLE IF EXISTS `v1_recharge_records`;
+CREATE TABLE `v1_recharge_records` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_v1_recharge_records_user_id` (`user_id`)
 );

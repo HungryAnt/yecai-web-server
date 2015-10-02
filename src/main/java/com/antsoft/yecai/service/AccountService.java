@@ -14,6 +14,9 @@ public class AccountService {
     @Autowired
     private AccountMapper accountMapper;
 
+    @Autowired
+    private RecordService recordService;
+
     public void clear() {
         accountMapper.clear();
     }
@@ -49,5 +52,11 @@ public class AccountService {
 
     public void increaseAmount(String userId, long amount) {
         accountMapper.increaseAmount(userId, amount);
+    }
+
+    @Transactional
+    public void recharge(String userId, long amount) {
+        increaseAmount(userId, amount);
+        recordService.createRechargeRecord(userId, amount);
     }
 }

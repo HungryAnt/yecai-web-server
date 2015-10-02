@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antsoft.yecai.mapper.RechargeRecordMapper">
+    <sql id="columns">user_id, amount</sql>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM v1_recharge_records
+    </select>
+
+    <delete id="clear">
+        DELETE FROM v1_recharge_records
+    </delete>
+
+    <insert id="create">
+        INSERT INTO v1_recharge_records(<include refid="columns"/>)
+        VALUES(#{userId}, #{amount})
+    </insert>
+</mapper>

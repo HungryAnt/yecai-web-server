@@ -2,6 +2,7 @@ package com.antsoft.yecai.service;
 
 import com.antsoft.yecai.YecaiTestSuite;
 import com.antsoft.yecai.mapper.GoodsPaymentRecordMapper;
+import com.antsoft.yecai.mapper.RechargeRecordMapper;
 import com.antsoft.yecai.mapper.RubbishRecycleRecordMapper;
 import org.junit.After;
 import org.junit.Before;
@@ -23,6 +24,9 @@ public class RecordServiceTest {
 
     @Autowired
     private RubbishRecycleRecordMapper rubbishRecycleRecordMapper;
+
+    @Autowired
+    private RechargeRecordMapper rechargeRecordMapper;
 
     @Autowired
     private RecordService recordService;
@@ -60,5 +64,15 @@ public class RecordServiceTest {
             recordService.createRubbishRecycleRecord("user_1", 100, 100);
         }
         assertEquals(count, rubbishRecycleRecordMapper.count());
+    }
+
+    @Test
+    public void testCreateRechargeRecord() {
+        final int count = 10;
+        assertEquals(0, rechargeRecordMapper.count());
+        for (int i = 0; i < count; i++) {
+            recordService.createRechargeRecord("user_1", 100);
+        }
+        assertEquals(count, rechargeRecordMapper.count());
     }
 }

@@ -117,4 +117,9 @@ public class DatabaseConfiguration {
     public MapperFactoryBean rubbishRecycleRecordMapper() {
         return getMapper(RubbishRecycleRecordMapper.class);
     }
+
+    @Bean
+    public MapperFactoryBean rechargeRecordMapper() {
+        return getMapper(RechargeRecordMapper.class);
+    }
 }

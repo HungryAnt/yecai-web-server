@@ -1,8 +1,10 @@
 package com.antsoft.yecai.service;
 
 import com.antsoft.yecai.mapper.GoodsPaymentRecordMapper;
+import com.antsoft.yecai.mapper.RechargeRecordMapper;
 import com.antsoft.yecai.mapper.RubbishRecycleRecordMapper;
 import com.antsoft.yecai.model.GoodsPaymentRecord;
+import com.antsoft.yecai.model.RechargeRecord;
 import com.antsoft.yecai.model.RubbishRecycleRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class RecordService {
     @Autowired
     private RubbishRecycleRecordMapper rubbishRecycleRecordMapper;
 
+    @Autowired
+    private RechargeRecordMapper rechargeRecordMapper;
+
     public void createGoodsPaymentRecord(String userId, String goodsKey, long amount) {
         GoodsPaymentRecord record = new GoodsPaymentRecord();
         record.setUserId(userId);
@@ -32,5 +37,12 @@ public class RecordService {
         record.setRubbishCount(rubbishCount);
         record.setAmount(amount);
         rubbishRecycleRecordMapper.create(record);
+    }
+
+    public void createRechargeRecord(String userId, long amount) {
+        RechargeRecord record = new RechargeRecord();
+        record.setUserId(userId);
+        record.setAmount(amount);
+        rechargeRecordMapper.create(record);
     }
 }
