@@ -29,12 +29,19 @@ public class UserVehicleService {
         if (level < 30) {
             return;
         }
+        if (userVehicleMapper.countByUserId(userId) > 0) {
+            return;
+        }
         String vehicle = randomVehicle();
         create(userId, vehicle);
     }
 
     public List<String> getVehicles(String userId) {
         return userVehicleMapper.getVehicles(userId);
+    }
+
+    public int countByUserId(String userId) {
+        return userVehicleMapper.countByUserId(userId);
     }
 
     public String randomVehicle() {
@@ -49,5 +56,9 @@ public class UserVehicleService {
 
     public String toVehicle(int num) {
         return "vehicle_" + num;
+    }
+
+    public void clearByUserId(String userId) {
+        userVehicleMapper.clearByUserId(userId);
     }
 }

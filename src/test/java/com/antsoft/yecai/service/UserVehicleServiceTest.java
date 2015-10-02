@@ -39,5 +39,8 @@ public class UserVehicleServiceTest {
         List<String> vehicles = userVehicleService.getVehicles(userId);
         assertEquals(1, vehicles.size());
         assertEquals(vehicle, vehicles.get(0));
+        assertEquals(1, userVehicleService.countByUserId(userId));
+        userVehicleService.clearByUserId(userId);
+        assertEquals(0, userVehicleService.countByUserId(userId));
     }
 }

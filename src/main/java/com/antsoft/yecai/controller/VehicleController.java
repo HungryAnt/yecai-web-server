@@ -39,4 +39,9 @@ public class VehicleController {
     public List<String> getVehicles(@RequestParam(value = "userId") String userId) {
         return userVehicleService.getVehicles(userId);
     }
+
+    @RequestMapping(value = "/clearByUserId", method = RequestMethod.DELETE)
+    public void clearByUserId(@RequestParam(value = "userId") String userId) {
+        userVehicleService.clearByUserId(userId);
+    }
 }

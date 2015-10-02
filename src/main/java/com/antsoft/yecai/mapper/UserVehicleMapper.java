@@ -12,4 +12,6 @@ public interface UserVehicleMapper {
     void clear();
     List<String> getVehicles(String userId);
     void create(@Param("userId") String userId, @Param("vehicle") String vehicle);
+    int countByUserId(String userId);
+    void clearByUserId(String userId);
 }

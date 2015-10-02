@@ -19,4 +19,12 @@
     <select id="getVehicles" resultType="String">
         SELECT vehicle FROM v1_user_vehicles WHERE user_id = #{userId}
     </select>
+
+    <select id="countByUserId" resultType="int">
+        SELECT count(*) FROM v1_user_vehicles WHERE user_id = #{userId}
+    </select>
+
+    <delete id="clearByUserId">
+        DELETE FROM v1_user_vehicles WHERE user_id = #{userId}
+    </delete>
 </mapper>
