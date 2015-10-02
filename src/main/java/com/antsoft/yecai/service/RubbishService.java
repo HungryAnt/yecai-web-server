@@ -26,6 +26,9 @@ public class RubbishService {
     @Transactional
     public void recycle(String userId) {
         int rubbishCount = rubbishMapper.getAllCountForUpdate(userId);
+        if (rubbishCount == 0) {
+            return;
+        }
         rubbishMapper.clearAllCount(userId);
         accountService.increaseAmount(userId, rubbishCount);
         recordService.createRubbishRecycleRecord(userId, rubbishCount, (long) rubbishCount);
