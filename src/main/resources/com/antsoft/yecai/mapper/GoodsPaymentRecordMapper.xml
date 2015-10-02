@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antsoft.yecai.mapper.GoodsPaymentRecordMapper">
+    <sql id="columns">user_id, goods_key, amount</sql>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM v1_goods_payment_records
+    </select>
+
+    <delete id="clear">
+        DELETE FROM v1_goods_payment_records
+    </delete>
+
+    <insert id="create">
+        INSERT INTO v1_goods_payment_records(<include refid="columns"/>)
+        VALUES(#{userId}, #{goodsKey}, #{amount})
+    </insert>
+</mapper>

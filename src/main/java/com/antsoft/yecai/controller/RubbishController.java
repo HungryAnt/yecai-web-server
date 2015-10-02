@@ -4,6 +4,7 @@ import com.antsoft.yecai.service.RubbishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,7 +17,7 @@ public class RubbishController {
     private RubbishService rubbishService;
 
     @RequestMapping(value = "/recycle", method = RequestMethod.POST)
-    public void recycle() {
-        rubbishService.recycle();
+    public void recycle(@RequestParam("userId") String userId) {
+        rubbishService.recycle(userId);
     }
 }

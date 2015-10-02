@@ -21,6 +21,9 @@ public class ShoppingService {
     @Autowired
     private UserVehicleService userVehicleService;
 
+    @Autowired
+    private RecordService recordService;
+
     private List<Goods> allVehicles;
 
     public ShoppingService() {
@@ -76,6 +79,7 @@ public class ShoppingService {
         if (amount >= price) {
             accountService.decreaseAmount(userId, price);
             userVehicleService.create(userId, key);
+            recordService.createGoodsPaymentRecord(userId, key, price);
         }
     }
 

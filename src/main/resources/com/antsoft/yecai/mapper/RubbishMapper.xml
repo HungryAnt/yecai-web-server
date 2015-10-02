@@ -12,7 +12,7 @@
     </delete>
 
     <select id="getAllCountForUpdate" resultType="int">
-        SELECT SUM(count) FROM v1_user_rubbishes WHERE user_id = #{userId}
+        SELECT SUM(count) FROM v1_user_rubbishes WHERE user_id = #{userId} FOR UPDATE
     </select>
 
     <update id="clearAllCount">
