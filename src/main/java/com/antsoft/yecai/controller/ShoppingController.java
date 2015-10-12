@@ -27,6 +27,13 @@ public class ShoppingController {
         return shoppingService.getVehicles(pageNo, pageSize);
     }
 
+    @RequestMapping(value = "/nostalgicVehicles", method = RequestMethod.GET)
+    public PageResult<Goods> getnostalgicVehicless(
+            @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "6") int pageSize) {
+        return shoppingService.getNostalgicVehicles(pageNo, pageSize);
+    }
+
     @RequestMapping(value = "/buy", method = RequestMethod.POST)
     public void buy(@RequestParam("userId") String userId,
                     @RequestParam("key") String key) {
