@@ -9,11 +9,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -23,8 +26,9 @@ import java.util.Map;
 public class BackendExceptionHandler {
     private Logger log = LoggerFactory.getLogger(getClass());
 
-    private static BackendErrorResponse getErrorResponse(HttpServletRequest request, HttpServletResponse response,
-                                                         String code, String message) {
+    private static BackendErrorResponse getErrorResponse(
+            HttpServletRequest request, HttpServletResponse response,
+            String code, String message) {
         BackendErrorResponse errorResponse = new BackendErrorResponse();
         String requestId = RequestUtility.getRequestId(request, response);
         if (requestId == null) {
@@ -51,10 +55,9 @@ public class BackendExceptionHandler {
     }
 
     @ExceptionHandler(RequestBodyValidationException.class)
-    public ResponseEntity<BackendErrorResponse> handleRequestBodyValidationException(HttpServletRequest request,
-                                                                                     HttpServletResponse response,
-                                                                                     RequestBodyValidationException
-                                                                                             ex) {
+    public ResponseEntity<BackendErrorResponse> handleRequestBodyValidationException(
+            HttpServletRequest request, HttpServletResponse response,
+            RequestBodyValidationException ex) {
         log.warn("Handle RequestBodyValidationException:", ex);
         BackendErrorResponse errorResponse = getErrorResponse(request, response, ex.getCode(), ex.getMessage());
         errorResponse.setFieldErrorMap(ex.getFieldMassageMap());
@@ -62,10 +65,24 @@ public class BackendExceptionHandler {
         return new ResponseEntity<>(errorResponse, ex.getHttpStatus());
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<BackendErrorResponse> handleMethodArgumentNotValidException(
+            HttpServletRequest request, HttpServletResponse response, MethodArgumentNotValidException ex) {
+        log.warn("Handle MethodArgumentNotValidException:", ex);
+        Map<String, String> fieldErrorMap = new LinkedHashMap<>();
+        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
+            fieldErrorMap.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        BackendErrorResponse errorResponse = getErrorResponse(request, response,
+                "MethodArgumentNotValidException", "400 Bad Request. The request is invalid.");
+        errorResponse.setFieldErrorMap(fieldErrorMap);
+        log.warn(errorResponseToString(errorResponse));
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(BackendException.class)
-    public ResponseEntity<BackendErrorResponse> handleBackendException(HttpServletRequest request,
-                                                                       HttpServletResponse response,
-                                                                       BackendException ex) {
+    public ResponseEntity<BackendErrorResponse> handleBackendException(
+            HttpServletRequest request, HttpServletResponse response, BackendException ex) {
         log.warn("Handle BackendException:", ex);
         BackendErrorResponse errorResponse = getErrorResponse(request, response, ex.getCode(), ex.getMessage());
         log.warn(errorResponseToString(errorResponse));
@@ -73,9 +90,8 @@ public class BackendExceptionHandler {
     }
 
     @ExceptionHandler(DataAccessException.class)
-    public ResponseEntity<BackendErrorResponse> handleDataAccessException(HttpServletRequest request,
-                                                                          HttpServletResponse response,
-                                                                          DataAccessException ex) {
+    public ResponseEntity<BackendErrorResponse> handleDataAccessException(
+            HttpServletRequest request, HttpServletResponse response, DataAccessException ex) {
         log.error("Handle DataAccessException:", ex);
         BackendErrorResponse errorResponse = getErrorResponse(request, response, "DatabaseError", "数据库错误");
         log.error(errorResponseToString(errorResponse));
@@ -83,8 +99,8 @@ public class BackendExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<BackendErrorResponse> handleException(HttpServletRequest request,
-                                                                HttpServletResponse response, Exception ex) {
+    public ResponseEntity<BackendErrorResponse> handleException(
+            HttpServletRequest request, HttpServletResponse response, Exception ex) {
         log.error("Handle Exception:", ex);
         BackendErrorResponse errorResponse = getErrorResponse(request, response, "UnknownError", ex.getMessage());
         log.error(errorResponseToString(errorResponse));

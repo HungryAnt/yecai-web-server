@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antsoft.yecai.mapper.UserRegisterInfoMapper">
+    <sql id="columns">login_user, password, user_id, gender, qq, email, introduction</sql>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM v1_user_register_infos
+    </select>
+
+    <delete id="clear">
+        DELETE FROM v1_user_register_infos
+    </delete>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO v1_user_register_infos(<include refid="columns"/>)
+        VALUES(#{login_user}, #{password}, #{userId}, #{gender}, #{qq}, #{email}, #{introduction})
+    </insert>
+
+    <select id="getEncodedPassword" resultType="String">
+        SELECT password FROM v1_user_register_infos
+        WHERE login_user = #{loginUser}
+    </select>
+
+    <select id="getUserId" resultType="String">
+        SELECT user_id FROM v1_user_register_infos
+        WHERE login_user = #{loginUser}
+    </select>
+</mapper>

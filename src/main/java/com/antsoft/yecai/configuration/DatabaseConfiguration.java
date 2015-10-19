@@ -122,4 +122,9 @@ public class DatabaseConfiguration {
     public MapperFactoryBean rechargeRecordMapper() {
         return getMapper(RechargeRecordMapper.class);
     }
+
+    @Bean
+    public MapperFactoryBean userRegisterInfoMapper() {
+        return getMapper(UserRegisterInfoMapper.class);
+    }
 }
