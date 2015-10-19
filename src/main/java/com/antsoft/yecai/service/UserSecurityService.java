@@ -19,6 +19,10 @@ public class UserSecurityService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    public void clear() {
+        userRegisterInfoMapper.clear();
+    }
+
     public void register(UserRegisterInfo userRegisterInfo) {
         if (!StringUtils.isBlank(userRegisterInfo.getRelatedUserId())) {
             userRegisterInfo.setUserId(userRegisterInfo.getRelatedUserId());
@@ -29,6 +33,10 @@ public class UserSecurityService {
 
     public boolean login(UserLoginInfo userLoginInfo) {
         return verify(userLoginInfo.getLoginName(), userLoginInfo.getPassword());
+    }
+
+    public UserRegisterInfo getByLoginName(String loginName) {
+        return userRegisterInfoMapper.getByLoginName(loginName);
     }
 
     private boolean verify(String loginUser, String password) {

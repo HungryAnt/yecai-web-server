@@ -11,4 +11,5 @@ public interface UserRegisterInfoMapper {
     void create(UserRegisterInfo userRegisterInfo);
     String getEncodedPassword(String loginUser);
     String getUserId(String loginUser);
+    UserRegisterInfo getByLoginName(String loginName);
 }

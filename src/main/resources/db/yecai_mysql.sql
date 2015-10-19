@@ -82,3 +82,18 @@ CREATE TABLE `v1_recharge_records` (
   PRIMARY KEY (`id`),
   KEY `idx_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `v1_user_register_infos`;
+CREATE TABLE `v1_user_register_infos` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `login_name` varchar(32) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `user_id` varchar(64) NOT NULL,
+  `gender` varchar(16) NOT NULL,
+  `qq` varchar(32) NOT NULL,
+  `email` varchar(64) NOT NULL,
+  `introduction` varchar(256) NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_login_name` (`login_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

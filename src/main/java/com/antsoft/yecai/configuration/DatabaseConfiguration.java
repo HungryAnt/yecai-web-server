@@ -7,8 +7,10 @@ import com.antsoft.framework.datetime.DateTimeTypeHandler;
 import com.antsoft.framework.utils.DataSourceUtility;
 import com.antsoft.yecai.mapper.*;
 import com.antsoft.yecai.model.User;
+import com.antsoft.yecai.model.UserRegisterInfo;
 import com.antsoft.yecai.model.UserVehicle;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.EnumTypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.slf4j.Logger;
@@ -62,8 +64,10 @@ public class DatabaseConfiguration {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
         Class[] types = new Class[] {
-            DateTimeTypeHandler.class,
-            UserVehicle.class, User.class
+                DateTimeTypeHandler.class,
+                EnumTypeHandler.class,
+                UserVehicle.class, User.class,
+                UserRegisterInfo.class
         };
 
         sqlSessionFactoryBean.setTypeAliases(types);
