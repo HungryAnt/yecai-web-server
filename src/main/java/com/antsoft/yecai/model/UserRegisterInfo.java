@@ -16,11 +16,9 @@ public class UserRegisterInfo {
     private String loginName;
 
     @NotBlank
-    @Size(min = 6, max = 20)
+    @Size(min = 3, max = 20)
     private String password;
 
-    @NotBlank
-    @Size(min = 36, max = 36)
     private String relatedUserId;
 
     private String userId;

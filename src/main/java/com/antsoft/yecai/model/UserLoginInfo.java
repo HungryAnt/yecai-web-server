@@ -13,7 +13,7 @@ public class UserLoginInfo {
     private String loginName;
 
     @NotBlank
-    @Size(min = 6, max = 20)
+    @Size(min = 3, max = 20)
     private String password;
 
     public String getLoginName() {
