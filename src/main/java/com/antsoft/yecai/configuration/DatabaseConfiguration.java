@@ -131,4 +131,9 @@ public class DatabaseConfiguration {
     public MapperFactoryBean userRegisterInfoMapper() {
         return getMapper(UserRegisterInfoMapper.class);
     }
+
+    @Bean
+    public MapperFactoryBean promotionLinkStatMapper() {
+        return getMapper(PromotionLinkStatMapper.class);
+    }
 }

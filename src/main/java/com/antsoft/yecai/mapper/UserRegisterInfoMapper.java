@@ -9,7 +9,7 @@ public interface UserRegisterInfoMapper {
     int count();
     void clear();
     void create(UserRegisterInfo userRegisterInfo);
-    String getEncodedPassword(String loginUser);
-    String getUserId(String loginUser);
+    String getEncodedPassword(String loginName);
+    String getUserId(String loginName);
     UserRegisterInfo getByLoginName(String loginName);
 }

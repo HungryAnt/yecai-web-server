@@ -97,3 +97,13 @@ CREATE TABLE `v1_user_register_infos` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_v1_user_register_infos_login_name` (`login_name`)
 );
+
+DROP TABLE IF EXISTS `v1_promotion_link_stats`;
+CREATE TABLE `v1_promotion_link_stats` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `promotion_count` bigint(20) NOT NULL DEFAULT '0',
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+);

@@ -1,5 +1,7 @@
 package com.antsoft.yecai.controller;
 
+import com.antsoft.yecai.service.PromotionLinkStatService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,14 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/link")
 public class FriendlyLinkController {
+    @Autowired
+    private PromotionLinkStatService promotionLinkStatService;
+
     @RequestMapping("/shop")
     public String shop() {
-        // todo
-        return "ok";
+        promotionLinkStatService.increaseCount("yecai-shop");
+        return "redirect:/yecai/underconstruction.html";
     }
 
     @RequestMapping("/tetris")
     public String tetrisGame() {
+        promotionLinkStatService.increaseCount("tetris");
         return "redirect:http://180.76.152.79/";
     }
 }

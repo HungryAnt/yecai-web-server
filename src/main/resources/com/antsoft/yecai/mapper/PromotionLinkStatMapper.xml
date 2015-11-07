@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antsoft.yecai.mapper.PromotionLinkStatMapper">
+    <select id="count" resultType="int">
+        SELECT count(*) FROM v1_promotion_link_stats
+    </select>
+
+    <delete id="clear">
+        DELETE FROM v1_promotion_link_stats
+    </delete>
+
+    <insert id="create">
+        INSERT INTO v1_promotion_link_stats(name)
+        VALUES(#{name})
+    </insert>
+
+    <select id="getPromotionCountByName" resultType="Long">
+        SELECT promotion_count FROM v1_promotion_link_stats WHERE name = #{name}
+    </select>
+
+
+    <update id="increaseCount">
+        UPDATE v1_promotion_link_stats SET promotion_count = promotion_count + 1
+        WHERE name = #{name}
+    </update>
+</mapper>

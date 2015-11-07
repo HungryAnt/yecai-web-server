@@ -1,6 +1,7 @@
 package com.antsoft.yecai.controller;
 
 import com.antsoft.yecai.model.UserLoginInfo;
+import com.antsoft.yecai.model.UserLoginResult;
 import com.antsoft.yecai.model.UserRegisterInfo;
 import com.antsoft.yecai.service.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class UserSecurityController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public boolean login(@Valid @RequestBody UserLoginInfo userLoginInfo) {
+    public UserLoginResult login(@Valid @RequestBody UserLoginInfo userLoginInfo) {
         return userSecurityService.login(userLoginInfo);
     }
 }

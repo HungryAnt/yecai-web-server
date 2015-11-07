@@ -1,13 +1,11 @@
 package com.antsoft.yecai.service;
 
-import com.mangofactory.swagger.core.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * Created by ant on 2015/9/19.

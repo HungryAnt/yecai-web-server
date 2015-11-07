@@ -57,11 +57,11 @@ public class UserSecurityServiceTest {
         UserLoginInfo userLoginInfo = new UserLoginInfo();
         userLoginInfo.setLoginName(u1.getLoginName());
         userLoginInfo.setPassword(u1.getPassword());
-        assertTrue(userSecurityService.login(userLoginInfo));
+        assertTrue(userSecurityService.login(userLoginInfo).isSuccess());
 
         userLoginInfo.setLoginName("xx");
         userLoginInfo.setPassword("xx");
-        assertFalse(userSecurityService.login(userLoginInfo));
+        assertFalse(userSecurityService.login(userLoginInfo).isSuccess());
     }
 
     private void validateUserRegisterInfo(UserRegisterInfo u1, UserRegisterInfo u2) {

@@ -3,6 +3,7 @@ package com.antsoft.yecai.service;
 import com.antsoft.yecai.exception.GameExceptions;
 import com.antsoft.yecai.mapper.UserRegisterInfoMapper;
 import com.antsoft.yecai.model.UserLoginInfo;
+import com.antsoft.yecai.model.UserLoginResult;
 import com.antsoft.yecai.model.UserRegisterInfo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class UserSecurityService {
         }
     }
 
-    public boolean login(UserLoginInfo userLoginInfo) {
+    public UserLoginResult login(UserLoginInfo userLoginInfo) {
         return verify(userLoginInfo.getLoginName(), userLoginInfo.getPassword());
     }
 
@@ -49,12 +50,18 @@ public class UserSecurityService {
         return userRegisterInfoMapper.getByLoginName(loginName);
     }
 
-    private boolean verify(String loginUser, String password) {
-        String encodedPassword = userRegisterInfoMapper.getEncodedPassword(loginUser);
+    private UserLoginResult verify(String loginName, String password) {
+        UserLoginResult userLoginResult = new UserLoginResult();
+        String encodedPassword = userRegisterInfoMapper.getEncodedPassword(loginName);
         if (encodedPassword == null) {
-            return false;
+            return userLoginResult;
         }
-        return passwordEncoder.matches(password, encodedPassword);
+        boolean success = passwordEncoder.matches(password, encodedPassword);
+        userLoginResult.setSuccess(success);
+        if (success) {
+            userLoginResult.setUserId(userRegisterInfoMapper.getUserId(loginName));
+        }
+        return userLoginResult;
     }
 
     private String encrypt(String password) {
