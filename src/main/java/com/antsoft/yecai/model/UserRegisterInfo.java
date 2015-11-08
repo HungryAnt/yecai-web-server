@@ -23,8 +23,7 @@ public class UserRegisterInfo {
 
     private String userId;
 
-    @NotNull
-    private Gender gender;
+    private Gender gender = Gender.Unknown;
 
     @NotNull
     @Size(min = 0, max = 32)
