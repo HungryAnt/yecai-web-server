@@ -36,4 +36,9 @@
         SELECT <include refid="columns"/> FROM v1_user_register_infos
         WHERE login_name = #{loginName}
     </select>
+
+    <select id="checkUserId" resultType="String">
+        SELECT user_id FROM v1_user_register_infos
+        WHERE user_id = #{userId}
+    </select>
 </mapper>

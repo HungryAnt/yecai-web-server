@@ -37,6 +37,8 @@ public class UserRegisterInfo {
     @Size(min = 0, max = 256)
     private String introduction;
 
+    private String sign;
+
     public String getLoginName() {
         return loginName;
     }
@@ -99,5 +101,13 @@ public class UserRegisterInfo {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
     }
 }

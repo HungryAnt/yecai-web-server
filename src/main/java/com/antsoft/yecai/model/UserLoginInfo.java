@@ -16,6 +16,8 @@ public class UserLoginInfo {
     @Size(min = 3, max = 20)
     private String password;
 
+    private String sign;
+
     public String getLoginName() {
         return loginName;
     }
@@ -30,5 +32,13 @@ public class UserLoginInfo {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
     }
 }

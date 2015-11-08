@@ -95,7 +95,8 @@ CREATE TABLE `v1_user_register_infos` (
   `introduction` varchar(256) NOT NULL,
   `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_v1_user_register_infos_login_name` (`login_name`)
+  UNIQUE KEY `idx_v1_user_register_infos_login_name` (`login_name`),
+  UNIQUE KEY `idx_v1_user_register_infos_user_id` (`user_id`)
 );
 
 DROP TABLE IF EXISTS `v1_promotion_link_stats`;

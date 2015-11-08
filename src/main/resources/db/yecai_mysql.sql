@@ -95,8 +95,9 @@ CREATE TABLE `v1_user_register_infos` (
   `introduction` varchar(256) NOT NULL,
   `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_login_name` (`login_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  UNIQUE KEY `idx_login_name` (`login_name`),
+  UNIQUE KEY `idx_user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `v1_promotion_link_stats`;
 CREATE TABLE `v1_promotion_link_stats` (

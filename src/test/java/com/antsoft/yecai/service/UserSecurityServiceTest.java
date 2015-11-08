@@ -1,6 +1,7 @@
 package com.antsoft.yecai.service;
 
 import com.antsoft.yecai.YecaiTestSuite;
+import com.antsoft.yecai.exception.GameExceptions;
 import com.antsoft.yecai.model.UserLoginInfo;
 import com.antsoft.yecai.model.UserRegisterInfo;
 import com.antsoft.yecai.type.Gender;
@@ -9,12 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by ant on 2015/10/19.
@@ -44,7 +42,7 @@ public class UserSecurityServiceTest {
         validateUserRegisterInfo(u1, u2);
     }
 
-    @Test(expected = DuplicateKeyException.class)
+    @Test(expected = GameExceptions.LoginUserAlreadyExistsException.class)
     public void testRegisterDuplicateUsers() {
         UserRegisterInfo u1 = generateUserRegisterInfo();
         userSecurityService.register(u1);

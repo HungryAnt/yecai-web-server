@@ -12,4 +12,5 @@ public interface UserRegisterInfoMapper {
     String getEncodedPassword(String loginName);
     String getUserId(String loginName);
     UserRegisterInfo getByLoginName(String loginName);
+    String checkUserId(String userId);
 }

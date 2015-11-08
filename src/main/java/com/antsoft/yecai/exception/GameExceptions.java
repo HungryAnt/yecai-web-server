@@ -13,4 +13,18 @@ public class GameExceptions {
                     String.format("该用户名(%s)已存在", loginUser));
         }
     }
+
+    public static class UserIdAlreadyExistsException extends BackendException {
+        public UserIdAlreadyExistsException() {
+            super(HttpStatus.BAD_REQUEST, "UserIdAlreadyExists",
+                    String.format("UserId已被绑定"));
+        }
+    }
+
+    public static class SignNotMatchException extends BackendException {
+        public SignNotMatchException() {
+            super(HttpStatus.BAD_REQUEST, "SignNotMatch",
+                    String.format("签名失败"));
+        }
+    }
 }
