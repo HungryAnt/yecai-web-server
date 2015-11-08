@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
  */
 public class UserRegisterInfo {
     @NotBlank
-    @Size(min = 3, max = 12)
+    @Size(min = 3, max = 16)
     private String loginName;
 
     @NotBlank
