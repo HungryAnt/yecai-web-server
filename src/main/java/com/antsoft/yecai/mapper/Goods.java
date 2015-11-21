@@ -1,12 +1,23 @@
 package com.antsoft.yecai.mapper;
 
+import com.antsoft.yecai.type.GoodsType;
+
 /**
  * Created by ant on 2015/9/22.
  */
 public class Goods {
+    private GoodsType goodsType;
     private String key;
     private String name;
     private long price;
+
+    public GoodsType getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType(GoodsType goodsType) {
+        this.goodsType = goodsType;
+    }
 
     public String getKey() {
         return key;

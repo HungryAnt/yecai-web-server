@@ -25,4 +25,10 @@ public class FriendlyLinkController {
         promotionLinkStatService.increaseCount("tetris");
         return "redirect:http://180.76.152.79/";
     }
+
+    @RequestMapping("/hao123")
+    public String hao123() {
+        promotionLinkStatService.increaseCount("hao123");
+        return "redirect:http://www.hao123.com/?tn=92775474_hao_pg";
+    }
 }

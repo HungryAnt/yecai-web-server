@@ -28,10 +28,17 @@ public class ShoppingController {
     }
 
     @RequestMapping(value = "/nostalgicVehicles", method = RequestMethod.GET)
-    public PageResult<Goods> getnostalgicVehicless(
+    public PageResult<Goods> getNostalgicVehicless(
             @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
             @RequestParam(value = "pageSize", required = false, defaultValue = "6") int pageSize) {
         return shoppingService.getNostalgicVehicles(pageNo, pageSize);
+    }
+
+    @RequestMapping(value = "/pets", method = RequestMethod.GET)
+    public PageResult<Goods> getPets(
+            @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "6") int pageSize) {
+        return shoppingService.getPets(pageNo, pageSize);
     }
 
     @RequestMapping(value = "/buy", method = RequestMethod.POST)

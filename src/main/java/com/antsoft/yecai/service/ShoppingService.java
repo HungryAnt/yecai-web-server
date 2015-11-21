@@ -3,6 +3,7 @@ package com.antsoft.yecai.service;
 import com.antsoft.framework.model.PageResult;
 import com.antsoft.framework.utils.PageUtility;
 import com.antsoft.yecai.mapper.Goods;
+import com.antsoft.yecai.type.GoodsType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,8 +28,26 @@ public class ShoppingService {
 
     private List<Goods> vehicles;
     private List<Goods> nostalgicVehicles;
+    private List<Goods> pets;
+
+    private List<List<Goods>> goodsListCollection;
 
     public ShoppingService() {
+        initVehicles();
+        initNostalgicVehicles();
+        initPets();
+        goodsListCollection = Arrays.asList(vehicles, nostalgicVehicles, pets);
+    }
+
+    private static Goods createGoods(GoodsType goodsType, String key, long price) {
+        Goods goods = new Goods();
+        goods.setGoodsType(goodsType);
+        goods.setKey(key);
+        goods.setPrice(price);
+        return goods;
+    }
+
+    private void initVehicles() {
         vehicles = new ArrayList<>();
         addVehicle(39, 350);
         addVehicle(40, 350);
@@ -59,7 +78,19 @@ public class ShoppingService {
         addDragon("DragonRed", 99999);
         addDragon("DragonBlack", 99999);
         addDragon("DragonBlue", 99999);
+    }
 
+    private void addVehicle(int num, long price) {
+        String key = String.format("vehicle_%s", num);
+        vehicles.add(createGoods(GoodsType.Vehicle, key, price));
+    }
+
+    private void addDragon(String name, long price) {
+        String key = String.format("dragon_%s", name);
+        vehicles.add(createGoods(GoodsType.Vehicle, key, price));
+    }
+
+    private void initNostalgicVehicles() {
         nostalgicVehicles = new ArrayList<>();
         addNostalgicVehicle(10, 1000);
         addNostalgicVehicle(24, 1000);
@@ -72,28 +103,25 @@ public class ShoppingService {
         addNostalgicVehicle(119, 2000);
     }
 
-    private void addVehicle(int num, long price) {
-        String key = String.format("vehicle_%s", num);
-        Goods goods = new Goods();
-        goods.setKey(key);
-        goods.setPrice(price);
-        vehicles.add(goods);
-    }
-
     private void addNostalgicVehicle(int num, long price) {
         String key = String.format("vehicle2_%s", num);
-        Goods goods = new Goods();
-        goods.setKey(key);
-        goods.setPrice(price);
-        nostalgicVehicles.add(goods);
+        nostalgicVehicles.add(createGoods(GoodsType.Vehicle, key, price));
     }
 
-    private void addDragon(String name, long price) {
-        String key = String.format("dragon_%s", name);
-        Goods goods = new Goods();
-        goods.setKey(key);
-        goods.setPrice(price);
-        vehicles.add(goods);
+    private void initPets() {
+        long price = 1200;
+        pets = new ArrayList<>();
+        addPets("c1", price);
+        addPets("c2", price);
+        addPets("c3", price);
+        addPets("f1", price);
+        addPets("f2", price);
+        addPets("f3", price);
+    }
+
+    private void addPets(String id, long price) {
+        String key = "pet_" + id;
+        pets.add(createGoods(GoodsType.Pet, key, price));
     }
 
     public PageResult<Goods> getVehicles(int pageNo, int pageSize) {
@@ -102,6 +130,10 @@ public class ShoppingService {
 
     public PageResult<Goods> getNostalgicVehicles(int pageNo, int pageSize) {
         return getGoodsPageResult(nostalgicVehicles, pageNo, pageSize);
+    }
+
+    public PageResult<Goods> getPets(int pageNo, int pageSize) {
+        return getGoodsPageResult(pets, pageNo, pageSize);
     }
 
     private PageResult<Goods> getGoodsPageResult(List<Goods> goods, int pageNo, int pageSize) {
@@ -124,7 +156,7 @@ public class ShoppingService {
     }
 
     private Goods findGoods(String key) {
-        for (List<Goods> goodsList : Arrays.asList(vehicles, nostalgicVehicles)) {
+        for (List<Goods> goodsList : goodsListCollection) {
             for (Goods goods : goodsList) {
                 if (goods.getKey().equals(key)) {
                     return goods;
