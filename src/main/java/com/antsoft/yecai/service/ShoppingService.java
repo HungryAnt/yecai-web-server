@@ -24,6 +24,9 @@ public class ShoppingService {
     private UserVehicleService userVehicleService;
 
     @Autowired
+    private UserPetService userPetService;
+
+    @Autowired
     private RecordService recordService;
 
     private List<Goods> vehicles;
@@ -150,7 +153,13 @@ public class ShoppingService {
         long amount = accountService.getAmountForUpdate(userId);
         if (amount >= price) {
             accountService.decreaseAmount(userId, price);
-            userVehicleService.create(userId, key);
+            if (goods.getGoodsType() == GoodsType.Pet) {
+                userPetService.create(userId, key);
+            } else if (goods.getGoodsType() == GoodsType.Vehicle) {
+                userVehicleService.create(userId, key);
+            } else {
+                throw new IllegalArgumentException("key:" + key);
+            }
             recordService.createGoodsPaymentRecord(userId, key, price);
         }
     }

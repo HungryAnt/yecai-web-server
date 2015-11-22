@@ -7,6 +7,7 @@ import com.antsoft.framework.datetime.DateTimeTypeHandler;
 import com.antsoft.framework.utils.DataSourceUtility;
 import com.antsoft.yecai.mapper.*;
 import com.antsoft.yecai.model.User;
+import com.antsoft.yecai.model.UserPet;
 import com.antsoft.yecai.model.UserRegisterInfo;
 import com.antsoft.yecai.model.UserVehicle;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -66,8 +67,9 @@ public class DatabaseConfiguration {
         Class[] types = new Class[] {
                 DateTimeTypeHandler.class,
                 EnumTypeHandler.class,
-                UserVehicle.class, User.class,
-                UserRegisterInfo.class
+                UserVehicle.class, UserPet.class,
+                User.class,
+                UserRegisterInfo.class,
         };
 
         sqlSessionFactoryBean.setTypeAliases(types);
@@ -135,5 +137,10 @@ public class DatabaseConfiguration {
     @Bean
     public MapperFactoryBean promotionLinkStatMapper() {
         return getMapper(PromotionLinkStatMapper.class);
+    }
+
+    @Bean
+    public MapperFactoryBean userPetMapper() {
+        return getMapper(UserPetMapper.class);
     }
 }

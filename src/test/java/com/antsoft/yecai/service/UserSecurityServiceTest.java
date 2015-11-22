@@ -5,6 +5,7 @@ import com.antsoft.yecai.exception.GameExceptions;
 import com.antsoft.yecai.model.UserLoginInfo;
 import com.antsoft.yecai.model.UserRegisterInfo;
 import com.antsoft.yecai.type.Gender;
+import com.antsoft.yecai.utils.MD5SignatureUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +47,9 @@ public class UserSecurityServiceTest {
     public void testRegisterDuplicateUsers() {
         UserRegisterInfo u1 = generateUserRegisterInfo();
         userSecurityService.register(u1);
-        userSecurityService.register(u1);
+
+        UserRegisterInfo u2 = generateUserRegisterInfo();
+        userSecurityService.register(u2);
     }
 
     public void testLogin() {
@@ -81,6 +84,8 @@ public class UserSecurityServiceTest {
         userRegisterInfo.setQq("517377100");
         userRegisterInfo.setEmail("517377100@qq.com");
         userRegisterInfo.setIntroduction("introduction");
+        userRegisterInfo.setSign(MD5SignatureUtil.getSignAsHex(
+                userRegisterInfo.getLoginName() +userRegisterInfo.getPassword() + "AntRegister"));
         return userRegisterInfo;
     }
 }

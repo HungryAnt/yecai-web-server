@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS `v1_users`;
 CREATE TABLE `v1_users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(64) NOT NULL,
@@ -12,7 +11,6 @@ CREATE TABLE `v1_users` (
   UNIQUE KEY `idx_v1_users_user_id` (`user_id`)
 );
 
-DROP TABLE IF EXISTS `v1_user_vehicles`;
 CREATE TABLE `v1_user_vehicles` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(64) NOT NULL,
@@ -21,7 +19,6 @@ CREATE TABLE `v1_user_vehicles` (
   KEY `idx_v1_user_vehicles_user_id` (`user_id`)
 );
 
-DROP TABLE IF EXISTS `v1_user_rubbishes`;
 CREATE TABLE `v1_user_rubbishes` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(64) NOT NULL,
@@ -31,7 +28,6 @@ CREATE TABLE `v1_user_rubbishes` (
   UNIQUE KEY `idx_v1_user_rubbishes_user_id_type_id` (`user_id`,`type_id`)
 );
 
-DROP TABLE IF EXISTS `v1_accounts`;
 CREATE TABLE `v1_accounts` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(64) NOT NULL,
@@ -41,7 +37,6 @@ CREATE TABLE `v1_accounts` (
   UNIQUE KEY `idx_v1_accounts_user_id` (`user_id`)
 );
 
-DROP TABLE IF EXISTS `v1_cheating_users`;
 CREATE TABLE `v1_cheating_users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(64) NOT NULL,
@@ -51,7 +46,6 @@ CREATE TABLE `v1_cheating_users` (
   KEY `idx_v1_cheating_users_user_id` (`user_id`)
 );
 
-DROP TABLE IF EXISTS `v1_goods_payment_records`;
 CREATE TABLE `v1_goods_payment_records` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(64) NOT NULL,
@@ -62,7 +56,6 @@ CREATE TABLE `v1_goods_payment_records` (
   KEY `idx_v1_goods_payment_records_user_id` (`user_id`)
 );
 
-DROP TABLE IF EXISTS `v1_rubbish_recycle_records`;
 CREATE TABLE `v1_rubbish_recycle_records` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(64) NOT NULL,
@@ -73,7 +66,6 @@ CREATE TABLE `v1_rubbish_recycle_records` (
   KEY `idx_v1_rubbish_recycle_records_user_id` (`user_id`)
 );
 
-DROP TABLE IF EXISTS `v1_recharge_records`;
 CREATE TABLE `v1_recharge_records` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(64) NOT NULL,
@@ -83,7 +75,6 @@ CREATE TABLE `v1_recharge_records` (
   KEY `idx_v1_recharge_records_user_id` (`user_id`)
 );
 
-DROP TABLE IF EXISTS `v1_user_register_infos`;
 CREATE TABLE `v1_user_register_infos` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `login_name` varchar(32) NOT NULL,
@@ -99,7 +90,6 @@ CREATE TABLE `v1_user_register_infos` (
   UNIQUE KEY `idx_v1_user_register_infos_user_id` (`user_id`)
 );
 
-DROP TABLE IF EXISTS `v1_promotion_link_stats`;
 CREATE TABLE `v1_promotion_link_stats` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
@@ -107,4 +97,14 @@ CREATE TABLE `v1_promotion_link_stats` (
   `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
+);
+
+CREATE TABLE `v1_user_pets` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `pet_id` varchar(64) NOT NULL,
+  `user_id` varchar(64) NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_v1_user_pets_pet_id` (`pet_id`),
+  KEY `idx_v1_user_pets_user_id` (`user_id`)
 );
