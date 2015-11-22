@@ -19,7 +19,7 @@ public class PetController {
     @Autowired
     private UserPetService userPetService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET, params = "userId")
     public List<UserPet> getByUserId(@RequestParam("userId") String userId) {
         return userPetService.getPetsByUserId(userId);
     }
