@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserPetServiceTest {
     private static final String USER_ID = "abc123";
-    private static final String PET_ID = "pet_c1";
+    private static final String PET_TYPE = "pet_c1";
 
     @Autowired
     private UserPetService userPetService;
@@ -39,33 +39,34 @@ public class UserPetServiceTest {
 
     @Test
     public void testCreate() {
-        userPetService.create(USER_ID, PET_ID);
+        userPetService.create(USER_ID, PET_TYPE);
         assertEquals(1, userPetService.count());
     }
 
     @Test
     public void testGetByPetId() {
-        userPetService.create(USER_ID, PET_ID);
-        UserPet userPet = userPetService.getByPetId(PET_ID);
-        assertNotNull(userPet);
-        assertEquals(USER_ID, userPet.getUserId());
-        assertEquals(PET_ID, userPet.getPetId());
+        UserPet userPet = userPetService.create(USER_ID, PET_TYPE);
+        UserPet resultUserPet = userPetService.getByPetId(userPet.getPetId());
+        assertNotNull(resultUserPet);
+        assertEquals(USER_ID, resultUserPet.getUserId());
+        assertEquals(PET_TYPE, resultUserPet.getPetType());
+        assertEquals(userPet.getPetId(), resultUserPet.getPetId());
     }
 
     @Test
     public void testGetPetsByUserId() {
         final int count = 10;
-        final String petIdPrefix = "pet_c";
+        final String petTypePrefix = "pet_c";
         for (int i = 0; i < count; i++) {
-            String petId = petIdPrefix + i;
-            userPetService.create(USER_ID, petId);
+            String petType = petTypePrefix + i;
+            userPetService.create(USER_ID, petType);
         }
         List<UserPet> userPets = userPetService.getPetsByUserId(USER_ID);
         assertEquals(count, userPets.size());
 
         for (UserPet userPet : userPets) {
             assertEquals(USER_ID, userPet.getUserId());
-            assertTrue(userPet.getPetId().startsWith(petIdPrefix));
+            assertTrue(userPet.getPetType().startsWith(petTypePrefix));
         }
     }
 }

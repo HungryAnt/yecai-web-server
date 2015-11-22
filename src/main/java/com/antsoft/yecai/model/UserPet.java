@@ -6,6 +6,7 @@ package com.antsoft.yecai.model;
 public class UserPet {
     private long id;
     private String petId;
+    private String petType;
     private String userId;
 
     public long getId() {
@@ -22,6 +23,14 @@ public class UserPet {
 
     public void setPetId(String petId) {
         this.petId = petId;
+    }
+
+    public String getPetType() {
+        return petType;
+    }
+
+    public void setPetType(String petType) {
+        this.petType = petType;
     }
 
     public String getUserId() {

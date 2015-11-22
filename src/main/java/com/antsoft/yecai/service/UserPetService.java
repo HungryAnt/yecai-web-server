@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by ant on 2015/11/22.
@@ -23,11 +24,14 @@ public class UserPetService {
         return userPetMapper.count();
     }
 
-    public void create(String userId, String petId) {
+    public UserPet create(String userId, String petType) {
+        String petId = UUID.randomUUID().toString();
         UserPet userPet = new UserPet();
         userPet.setPetId(petId);
+        userPet.setPetType(petType);
         userPet.setUserId(userId);
         userPetMapper.create(userPet);
+        return userPet;
     }
 
     public UserPet getByPetId(String petId) {

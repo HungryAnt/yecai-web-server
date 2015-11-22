@@ -113,6 +113,7 @@ DROP TABLE IF EXISTS `v1_user_pets`;
 CREATE TABLE `v1_user_pets` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `pet_id` varchar(64) NOT NULL,
+  `pet_type` varchar(64) NOT NULL,
   `user_id` varchar(64) NOT NULL,
   `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
