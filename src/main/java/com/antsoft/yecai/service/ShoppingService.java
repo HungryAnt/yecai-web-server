@@ -52,6 +52,19 @@ public class ShoppingService {
 
     private void initVehicles() {
         vehicles = new ArrayList<>();
+        addVehicle(138, 1000);
+        addVehicle(144, 1000);
+        addVehicle(163, 1000);
+        addVehicle(220, 1000);
+        addVehicle(228, 1000);
+        addVehicle(301, 1000);
+
+        addVehicle(402, 3000);
+        addVehicle(450, 4500);
+        addVehicle(552, 1000);
+        addVehicle(558, 1000);
+        addVehicle(569, 1000);
+
         addVehicle(39, 350);
         addVehicle(40, 350);
         addVehicle(50, 500);
@@ -114,15 +127,19 @@ public class ShoppingService {
     private void initPets() {
         long price = 1200;
         pets = new ArrayList<>();
-        addPets("c1", price);
-        addPets("c2", price);
-        addPets("c3", price);
-        addPets("f1", price);
-        addPets("f2", price);
-        addPets("f3", price);
+//        addPet("c1", price);
+//        addPet("c2", price);
+//        addPet("c3", price);
+        addPet("f1", price);
+        addPet("f2", price);
+        addPet("f3", price);
+
+        for (int i = 1; i <= 8; i++) {
+            addPet("g" + i, price);
+        }
     }
 
-    private void addPets(String id, long price) {
+    private void addPet(String id, long price) {
         String key = "pet_" + id;
         pets.add(createGoods(GoodsType.Pet, key, price));
     }
