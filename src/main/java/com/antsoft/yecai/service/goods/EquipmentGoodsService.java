@@ -80,15 +80,15 @@ public class EquipmentGoodsService extends GoodsServiceBase {
     }
 
     private void initHats() {
-        addHat(2, 1000);
+        addHat(2, 2000);
         addHat(18, 1000);
         addHat(20, 1000);
-        addHat(21, 1000);
-        addHat(24, 1000);
+        addHat(21, 1500);
+        addHat(24, 1500);
         addHat(37, 1000);
         addHat(38, 1000);
-        addHat(392, 1000);
-        addHat(395, 1000);
+        addHat(392, 1500);
+        addHat(395, 1500);
 
         addHat2(12, 1000);
         addHat2(23, 1000);

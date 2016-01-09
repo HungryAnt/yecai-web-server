@@ -49,10 +49,10 @@ public class NewVehicleGoodsService extends VehicleGoodsServiceBase {
         addVehicle(723, 1000);
 
         // 时装载具
-        addVehicle(697, 45);
+        addVehicle(697, 4500);
         addVehicle(376, 1000);
         addVehicle(456, 1000);
-        addVehicle(439, 45);
+        addVehicle(439, 4500);
 
         // 飞碟
         addVehicle(192, 2000);
