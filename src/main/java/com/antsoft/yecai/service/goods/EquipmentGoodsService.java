@@ -67,12 +67,16 @@ public class EquipmentGoodsService extends GoodsServiceBase {
 
     private void addWing(int num, long price) {
         String key = "wing_" + num;
-        wings.add(GoodsUtils.createGoods(GoodsType.Wing, key, price));
+        Goods goods = GoodsUtils.createGoods(GoodsType.Wing, key, price);
+        wings.add(goods);
+        add(goods);
     }
 
     private void addWing2(int num, long price) {
         String key = "wing2_" + num;
-        wings.add(GoodsUtils.createGoods(GoodsType.Wing, key, price));
+        Goods goods = GoodsUtils.createGoods(GoodsType.Wing, key, price);
+        wings.add(goods);
+        add(goods);
     }
 
     private void initHats() {
@@ -96,12 +100,16 @@ public class EquipmentGoodsService extends GoodsServiceBase {
 
     private void addHat(int num, long price) {
         String key = "hat_" + num;
-        hats.add(GoodsUtils.createGoods(GoodsType.Hat, key, price));
+        Goods goods = GoodsUtils.createGoods(GoodsType.Hat, key, price);
+        hats.add(goods);
+        add(goods);
     }
 
     private void addHat2(int num, long price) {
         String key = "hat2_" + num;
-        hats.add(GoodsUtils.createGoods(GoodsType.Hat, key, price));
+        Goods goods = GoodsUtils.createGoods(GoodsType.Hat, key, price);
+        hats.add(goods);
+        add(goods);
     }
 
     private void initEyeWears() {
@@ -114,6 +122,8 @@ public class EquipmentGoodsService extends GoodsServiceBase {
 
     private void addEyeWear(int num, long price) {
         String key = "eye_wear_" + num;
-        eyeWears.add(GoodsUtils.createGoods(GoodsType.EyeWear, key, price));
+        Goods goods = GoodsUtils.createGoods(GoodsType.EyeWear, key, price);
+        eyeWears.add(goods);
+        add(goods);
     }
 }

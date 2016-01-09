@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by ant on 2015/9/22.
@@ -51,11 +49,7 @@ public class ShoppingService {
     @Autowired
     private EquipmentGoodsService equipmentGoodsService;
 
-    private List<List<Goods>> goodsListCollection;
-
-    public ShoppingService() {
-
-    }
+    private Map<String, Goods> goodsMap = new HashMap<>();
 
     @PostConstruct
     private void initGoods() {
@@ -66,9 +60,10 @@ public class ShoppingService {
                 petGoodsService,
                 equipmentGoodsService
         );
-        goodsListCollection = new ArrayList<>();
         for (GoodsServiceBase goodsService : goodsServices) {
-            goodsListCollection.add(goodsService.getGoods());
+            for (Goods goods : goodsService.getGoods()) {
+                goodsMap.put(goods.getKey(), goods);
+            }
         }
     }
 
@@ -132,12 +127,8 @@ public class ShoppingService {
     }
 
     private Goods findGoods(String key) {
-        for (List<Goods> goodsList : goodsListCollection) {
-            for (Goods goods : goodsList) {
-                if (goods.getKey().equals(key)) {
-                    return goods;
-                }
-            }
+        if (goodsMap.containsKey(key)) {
+            return goodsMap.get(key);
         }
         throw new IllegalArgumentException("wrong key:" + key);
     }
