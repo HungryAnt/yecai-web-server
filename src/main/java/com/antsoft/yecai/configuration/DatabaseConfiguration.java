@@ -6,10 +6,7 @@ package com.antsoft.yecai.configuration;
 import com.antsoft.framework.datetime.DateTimeTypeHandler;
 import com.antsoft.framework.utils.DataSourceUtility;
 import com.antsoft.yecai.mapper.*;
-import com.antsoft.yecai.model.User;
-import com.antsoft.yecai.model.UserPet;
-import com.antsoft.yecai.model.UserRegisterInfo;
-import com.antsoft.yecai.model.UserVehicle;
+import com.antsoft.yecai.model.*;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.EnumTypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -70,6 +67,7 @@ public class DatabaseConfiguration {
                 UserVehicle.class, UserPet.class,
                 User.class,
                 UserRegisterInfo.class,
+                UserEquipment.class
         };
 
         sqlSessionFactoryBean.setTypeAliases(types);
@@ -142,5 +140,9 @@ public class DatabaseConfiguration {
     @Bean
     public MapperFactoryBean userPetMapper() {
         return getMapper(UserPetMapper.class);
+    }
+    @Bean
+    public MapperFactoryBean userEquipmentMapper() {
+        return getMapper(UserEquipmentMapper.class);
     }
 }

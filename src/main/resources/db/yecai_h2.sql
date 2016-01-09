@@ -109,3 +109,13 @@ CREATE TABLE `v1_user_pets` (
   UNIQUE KEY `idx_v1_user_pets_pet_id` (`pet_id`),
   KEY `idx_v1_user_pets_user_id` (`user_id`)
 );
+
+CREATE TABLE `v1_user_equipments` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `equipment_type` varchar(32) NOT NULL,
+  `equipment_key` varchar(64) NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_v1_user_equipments_user_id` (`user_id`)
+);

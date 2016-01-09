@@ -120,3 +120,14 @@ CREATE TABLE `v1_user_pets` (
   UNIQUE KEY `idx_pet_id` (`pet_id`),
   KEY `idx_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `v1_user_equipments`;
+CREATE TABLE `v1_user_equipments` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `equipment_type` varchar(32) NOT NULL,
+  `equipment_key` varchar(64) NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
