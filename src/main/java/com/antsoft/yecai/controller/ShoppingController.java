@@ -20,6 +20,13 @@ public class ShoppingController {
     @Autowired
     private ShoppingService shoppingService;
 
+    @RequestMapping(value = "/newVehicles", method = RequestMethod.GET)
+    public PageResult<Goods> getNewVehicles(
+            @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "6") int pageSize) {
+        return shoppingService.getNewVehicles(pageNo, pageSize);
+    }
+
     @RequestMapping(value = "/vehicles", method = RequestMethod.GET)
     public PageResult<Goods> getVehicles(
             @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
@@ -39,6 +46,27 @@ public class ShoppingController {
             @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
             @RequestParam(value = "pageSize", required = false, defaultValue = "6") int pageSize) {
         return shoppingService.getPets(pageNo, pageSize);
+    }
+
+    @RequestMapping(value = "/wings", method = RequestMethod.GET)
+    public PageResult<Goods> getWings(
+            @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "6") int pageSize) {
+        return shoppingService.getWings(pageNo, pageSize);
+    }
+
+    @RequestMapping(value = "/eyeWears", method = RequestMethod.GET)
+    public PageResult<Goods> getEyeWears(
+            @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "6") int pageSize) {
+        return shoppingService.getEyeWears(pageNo, pageSize);
+    }
+
+    @RequestMapping(value = "/hats", method = RequestMethod.GET)
+    public PageResult<Goods> getHats(
+            @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "6") int pageSize) {
+        return shoppingService.getHats(pageNo, pageSize);
     }
 
     @RequestMapping(value = "/buy", method = RequestMethod.POST)

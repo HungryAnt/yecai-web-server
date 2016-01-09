@@ -5,5 +5,8 @@ package com.antsoft.yecai.type;
  */
 public enum GoodsType {
     Vehicle,
-    Pet
+    Pet,
+    Wing,
+    Hat,
+    EyeWear
 }
