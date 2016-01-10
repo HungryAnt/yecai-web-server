@@ -37,31 +37,31 @@ public class EquipmentGoodsService extends GoodsServiceBase {
     private void initWings() {
         addWing(16, 1000);
         addWing(48, 1000);
-        addWing(51, 1000);
+        addWing(51, 500);
         addWing(52, 1000);
         addWing(94, 1000);
-        addWing(130, 1000);
-        addWing(131, 1000);
+        addWing(130, 2400);
+        addWing(131, 2400);
         addWing(253, 1000);
-        addWing(278, 1000);
-        addWing(316, 1000);
-        addWing(338, 1000);
+        addWing(278, 2400);
+        addWing(316, 2400);
+        addWing(338, 2400);
         addWing(355, 1000);
-        addWing(394, 1000);
-        addWing(430, 1000);
-        addWing(467, 1000);
+        addWing(394, 2400);
+        addWing(430, 2400);
+        addWing(467, 2400);
         addWing(486, 1000);
         addWing(559, 1000);
         addWing(587, 1000);
-        addWing(617, 1000);
-        addWing(686, 1000);
+        addWing(617, 2400);
+        addWing(686, 2400);
         addWing(715, 1000);
-        addWing(772, 1000);
-        addWing(795, 1000);
-        addWing(819, 1000);
+        addWing(772, 2400);
+        addWing(795, 2400);
+        addWing(819, 2400);
 
         addWing2(13, 1000);
-        addWing2(15, 1000);
+        addWing2(15, 500);
         addWing2(16, 1000);
     }
 
@@ -80,15 +80,15 @@ public class EquipmentGoodsService extends GoodsServiceBase {
     }
 
     private void initHats() {
-        addHat(2, 2000);
+        addHat(2, 1800);
         addHat(18, 1000);
         addHat(20, 1000);
-        addHat(21, 1500);
-        addHat(24, 1500);
+        addHat(21, 1800);
+        addHat(24, 1800);
         addHat(37, 1000);
         addHat(38, 1000);
-        addHat(392, 1500);
-        addHat(395, 1500);
+        addHat(392, 1800);
+        addHat(395, 1800);
 
         addHat2(12, 1000);
         addHat2(23, 1000);
