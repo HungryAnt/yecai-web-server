@@ -1,15 +1,14 @@
 package com.antsoft.yecai.controller;
 
 import com.antsoft.framework.model.PageResult;
-import com.antsoft.yecai.mapper.Goods;
+import com.antsoft.yecai.model.Goods;
 import com.antsoft.yecai.service.ShoppingService;
+import com.antsoft.yecai.type.EquipmentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * Created by ant on 2015/9/22.
@@ -67,6 +66,14 @@ public class ShoppingController {
             @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
             @RequestParam(value = "pageSize", required = false, defaultValue = "6") int pageSize) {
         return shoppingService.getHats(pageNo, pageSize);
+    }
+
+    @RequestMapping(value = "/goods", method = RequestMethod.GET)
+    public PageResult<Goods> getGoods(
+            @RequestParam(value = "equipmentType") EquipmentType equipmentType,
+            @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "6") int pageSize) {
+        return shoppingService.getGoods(equipmentType, pageNo, pageSize);
     }
 
     @RequestMapping(value = "/buy", method = RequestMethod.POST)

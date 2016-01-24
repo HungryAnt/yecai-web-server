@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antsoft.yecai.mapper.GoodsMapper">
+    <sql id="columns">equipment_type, key, price</sql>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM v1_goods
+    </select>
+
+    <delete id="clear">
+        DELETE FROM v1_goods
+    </delete>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO v1_goods(<include refid="columns"/>)
+        VALUES(#{equipmentType}, #{key}, #{price})
+    </insert>
+
+    <select id="getByKey" resultMap="goodsMap">
+        SELECT id, <include refid="columns"/> FROM v1_goods
+        WHERE key = #{key}
+    </select>
+
+    <select id="getByEquipmentType" resultMap="goodsMap">
+        SELECT id, <include refid="columns"/> FROM v1_goods
+        WHERE equipment_type = #{equipmentType}
+        ORDER BY id
+        <bind name="offset" value="pageSize * (pageNo - 1)" />
+        <bind name="limit" value="pageSize" />
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countByEquipmentType" resultType="int">
+        SELECT count(*) FROM v1_goods WHERE equipment_type = #{equipmentType}
+    </select>
+
+    <resultMap id="goodsMap" type="Goods">
+        <result property="equipmentType" column="equipment_type" typeHandler="EnumTypeHandler"/>
+    </resultMap>
+</mapper>

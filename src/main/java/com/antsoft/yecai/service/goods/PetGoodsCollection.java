@@ -1,14 +1,12 @@
 package com.antsoft.yecai.service.goods;
 
-import com.antsoft.yecai.type.GoodsType;
-import org.springframework.stereotype.Service;
+import com.antsoft.yecai.type.EquipmentType;
 
 /**
  * Created by ant on 2016/1/9.
  */
-@Service
-public class PetGoodsService extends GoodsServiceBase {
-    public PetGoodsService() {
+public class PetGoodsCollection extends GoodsBaseCollection {
+    public PetGoodsCollection() {
         initPets();
     }
 
@@ -28,6 +26,6 @@ public class PetGoodsService extends GoodsServiceBase {
 
     private void addPet(String id, long price) {
         String key = "pet_" + id;
-        add(GoodsUtils.createGoods(GoodsType.Pet, key, price));
+        add(GoodsUtils.createGoods(EquipmentType.Pet, key, price));
     }
 }

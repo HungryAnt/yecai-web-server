@@ -1,14 +1,12 @@
 package com.antsoft.yecai.service.goods;
 
-import com.antsoft.yecai.type.GoodsType;
-import org.springframework.stereotype.Service;
+import com.antsoft.yecai.type.EquipmentType;
 
 /**
  * Created by ant on 2016/1/9.
  */
-@Service
-public class NostalgicVehicleGoodsService extends GoodsServiceBase {
-    public NostalgicVehicleGoodsService() {
+public class NostalgicVehicleGoodsCollection extends GoodsBaseCollection {
+    public NostalgicVehicleGoodsCollection() {
         initNostalgicVehicles();
     }
 
@@ -26,6 +24,6 @@ public class NostalgicVehicleGoodsService extends GoodsServiceBase {
 
     private void addNostalgicVehicle(int num, long price) {
         String key = String.format("vehicle2_%s", num);
-        add(GoodsUtils.createGoods(GoodsType.Vehicle, key, price));
+        add(GoodsUtils.createGoods(EquipmentType.Vehicle, key, price));
     }
 }

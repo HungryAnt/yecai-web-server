@@ -131,3 +131,15 @@ CREATE TABLE `v1_user_equipments` (
   PRIMARY KEY (`id`),
   KEY `idx_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `v1_goods`;
+CREATE TABLE `v1_goods` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `equipment_type` varchar(32) NOT NULL,
+  `key` varchar(64) NOT NULL,
+  `price` bigint(20) NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_key` (`key`),
+  KEY `idx_equipment_type` (`equipment_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

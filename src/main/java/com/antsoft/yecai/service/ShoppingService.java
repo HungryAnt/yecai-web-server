@@ -2,16 +2,19 @@ package com.antsoft.yecai.service;
 
 import com.antsoft.framework.model.PageResult;
 import com.antsoft.framework.utils.PageUtility;
-import com.antsoft.yecai.mapper.Goods;
+import com.antsoft.yecai.mapper.GoodsMapper;
+import com.antsoft.yecai.model.Goods;
 import com.antsoft.yecai.service.goods.*;
 import com.antsoft.yecai.type.EquipmentType;
-import com.antsoft.yecai.type.GoodsType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ant on 2015/9/22.
@@ -33,73 +36,31 @@ public class ShoppingService {
     @Autowired
     private RecordService recordService;
 
-    // goods services
     @Autowired
-    private NewVehicleGoodsService newVehicleGoodsService;
+    private GoodsMapper goodsMapper;
 
-    @Autowired
-    private VehicleGoodsService vehicleGoodsService;
-
-    @Autowired
-    private NostalgicVehicleGoodsService nostalgicVehicleGoodsService;
-
-    @Autowired
-    private PetGoodsService petGoodsService;
-
-    @Autowired
-    private EquipmentGoodsService equipmentGoodsService;
+    private NewVehicleGoodsCollection newVehicleGoodsCollection = new NewVehicleGoodsCollection();
+    private VehicleGoodsCollection vehicleGoodsCollection = new VehicleGoodsCollection();
+    private NostalgicVehicleGoodsCollection nostalgicVehicleGoodsCollection = new NostalgicVehicleGoodsCollection();
+    private PetGoodsCollection petGoodsCollection = new PetGoodsCollection();
+    private EquipmentGoodsCollection equipmentGoodsCollection = new EquipmentGoodsCollection();
 
     private Map<String, Goods> goodsMap = new HashMap<>();
 
     @PostConstruct
     private void initGoods() {
-        List<GoodsServiceBase> goodsServices = Arrays.asList(
-                newVehicleGoodsService,
-                vehicleGoodsService,
-                nostalgicVehicleGoodsService,
-                petGoodsService,
-                equipmentGoodsService
+        List<GoodsBaseCollection> goodsCollections = Arrays.asList(
+                newVehicleGoodsCollection,
+                vehicleGoodsCollection,
+                nostalgicVehicleGoodsCollection,
+                petGoodsCollection,
+                equipmentGoodsCollection
         );
-        for (GoodsServiceBase goodsService : goodsServices) {
-            for (Goods goods : goodsService.getGoods()) {
+        for (GoodsBaseCollection collection : goodsCollections) {
+            for (Goods goods : collection.getGoods()) {
                 goodsMap.put(goods.getKey(), goods);
             }
         }
-    }
-
-    public PageResult<Goods> getNewVehicles(int pageNo, int pageSize) {
-        return getGoodsPageResult(newVehicleGoodsService.getGoods(), pageNo, pageSize);
-    }
-
-    public PageResult<Goods> getVehicles(int pageNo, int pageSize) {
-        return getGoodsPageResult(vehicleGoodsService.getGoods(), pageNo, pageSize);
-    }
-
-    public PageResult<Goods> getNostalgicVehicles(int pageNo, int pageSize) {
-        return getGoodsPageResult(nostalgicVehicleGoodsService.getGoods(), pageNo, pageSize);
-    }
-
-    public PageResult<Goods> getPets(int pageNo, int pageSize) {
-        return getGoodsPageResult(petGoodsService.getGoods(), pageNo, pageSize);
-    }
-
-    public PageResult<Goods> getWings(int pageNo, int pageSize) {
-        return getGoodsPageResult(equipmentGoodsService.getWings(), pageNo, pageSize);
-    }
-
-    public PageResult<Goods> getEyeWears(int pageNo, int pageSize) {
-        return getGoodsPageResult(equipmentGoodsService.getEyeWears(), pageNo, pageSize);
-    }
-
-    public PageResult<Goods> getHats(int pageNo, int pageSize) {
-        return getGoodsPageResult(equipmentGoodsService.getHats(), pageNo, pageSize);
-    }
-
-    private PageResult<Goods> getGoodsPageResult(List<Goods> goods, int pageNo, int pageSize) {
-        int offset = PageUtility.getOffset(pageNo, pageSize);
-        int toIndex = Math.min(offset + pageSize, goods.size());
-        List<Goods> goodsList = goods.subList(offset, toIndex);
-        return PageResult.createResponse(goodsList, goods.size(), pageNo, pageSize);
     }
 
     @Transactional
@@ -109,16 +70,17 @@ public class ShoppingService {
         long amount = accountService.getAmountForUpdate(userId);
         if (amount >= price) {
             accountService.decreaseAmount(userId, price);
-            if (goods.getGoodsType() == GoodsType.Pet) {
+            if (goods.getEquipmentType() == EquipmentType.Pet) {
                 userPetService.create(userId, key);
-            } else if (goods.getGoodsType() == GoodsType.Vehicle) {
+            } else if (goods.getEquipmentType() == EquipmentType.Vehicle) {
                 userVehicleService.create(userId, key);
-            } else if (goods.getGoodsType() == GoodsType.Wing) {
-                userEquipmentService.create(userId, EquipmentType.Wing, key);
-            } else if (goods.getGoodsType() == GoodsType.Hat) {
-                userEquipmentService.create(userId, EquipmentType.Hat, key);
-            } else if (goods.getGoodsType() == GoodsType.EyeWear) {
-                userEquipmentService.create(userId, EquipmentType.EyeWear, key);
+            } else if (goods.getEquipmentType() == EquipmentType.Underpan
+                    || goods.getEquipmentType() == EquipmentType.Wing
+                    || goods.getEquipmentType() == EquipmentType.EyeWear
+                    || goods.getEquipmentType() == EquipmentType.Hat
+                    || goods.getEquipmentType() == EquipmentType.EarWear
+                    || goods.getEquipmentType() == EquipmentType.Handheld) {
+                userEquipmentService.create(userId, goods.getEquipmentType(), key);
             } else {
                 throw new IllegalArgumentException("key:" + key);
             }
@@ -131,5 +93,46 @@ public class ShoppingService {
             return goodsMap.get(key);
         }
         throw new IllegalArgumentException("wrong key:" + key);
+    }
+
+    private PageResult<Goods> getGoodsPageResult(List<Goods> goods, int pageNo, int pageSize) {
+        int offset = PageUtility.getOffset(pageNo, pageSize);
+        int toIndex = Math.min(offset + pageSize, goods.size());
+        List<Goods> goodsList = goods.subList(offset, toIndex);
+        return PageResult.createResponse(goodsList, goods.size(), pageNo, pageSize);
+    }
+
+    public PageResult<Goods> getNewVehicles(int pageNo, int pageSize) {
+        return getGoodsPageResult(newVehicleGoodsCollection.getGoods(), pageNo, pageSize);
+    }
+
+    public PageResult<Goods> getVehicles(int pageNo, int pageSize) {
+        return getGoodsPageResult(vehicleGoodsCollection.getGoods(), pageNo, pageSize);
+    }
+
+    public PageResult<Goods> getNostalgicVehicles(int pageNo, int pageSize) {
+        return getGoodsPageResult(nostalgicVehicleGoodsCollection.getGoods(), pageNo, pageSize);
+    }
+
+    public PageResult<Goods> getPets(int pageNo, int pageSize) {
+        return getGoodsPageResult(petGoodsCollection.getGoods(), pageNo, pageSize);
+    }
+
+    public PageResult<Goods> getWings(int pageNo, int pageSize) {
+        return getGoodsPageResult(equipmentGoodsCollection.getWings(), pageNo, pageSize);
+    }
+
+    public PageResult<Goods> getEyeWears(int pageNo, int pageSize) {
+        return getGoodsPageResult(equipmentGoodsCollection.getEyeWears(), pageNo, pageSize);
+    }
+
+    public PageResult<Goods> getHats(int pageNo, int pageSize) {
+        return getGoodsPageResult(equipmentGoodsCollection.getHats(), pageNo, pageSize);
+    }
+
+    public PageResult<Goods> getGoods(EquipmentType equipmentType, int pageNo, int pageSize) {
+        List<Goods> goodsList = goodsMapper.getByEquipmentType(equipmentType, pageNo, pageSize);
+        int count = goodsMapper.countByEquipmentType(equipmentType);
+        return PageResult.createResponse(goodsList, count, pageNo, pageSize);
     }
 }

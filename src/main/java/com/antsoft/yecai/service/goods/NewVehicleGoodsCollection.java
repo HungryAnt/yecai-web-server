@@ -1,13 +1,10 @@
 package com.antsoft.yecai.service.goods;
 
-import org.springframework.stereotype.Service;
-
 /**
  * Created by ant on 2016/1/9.
  */
-@Service
-public class NewVehicleGoodsService extends VehicleGoodsServiceBase {
-    public NewVehicleGoodsService() {
+public class NewVehicleGoodsCollection extends VehicleGoodsBaseCollection {
+    public NewVehicleGoodsCollection() {
         initVehicles();
     }
 

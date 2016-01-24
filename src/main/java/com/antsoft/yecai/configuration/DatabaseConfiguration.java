@@ -67,7 +67,8 @@ public class DatabaseConfiguration {
                 UserVehicle.class, UserPet.class,
                 User.class,
                 UserRegisterInfo.class,
-                UserEquipment.class
+                UserEquipment.class,
+                Goods.class
         };
 
         sqlSessionFactoryBean.setTypeAliases(types);
@@ -141,8 +142,14 @@ public class DatabaseConfiguration {
     public MapperFactoryBean userPetMapper() {
         return getMapper(UserPetMapper.class);
     }
+
     @Bean
     public MapperFactoryBean userEquipmentMapper() {
         return getMapper(UserEquipmentMapper.class);
+    }
+
+    @Bean
+    public MapperFactoryBean goodsMapper() {
+        return getMapper(GoodsMapper.class);
     }
 }
