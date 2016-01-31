@@ -23,4 +23,9 @@ public class UserController {
     public List<User> findByUserName(@RequestParam(value = "userName") String userName) {
         return userService.findByUserName(userName);
     }
+
+    @RequestMapping(value = "/getByLoginName", method = RequestMethod.GET)
+    public User getByLoginName(@RequestParam(value = "loginName") String loginName) {
+        return userService.getByLoginName(loginName);
+    }
 }

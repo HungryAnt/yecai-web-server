@@ -1,7 +1,9 @@
 package com.antsoft.yecai.service;
 
 import com.antsoft.yecai.mapper.UserMapper;
+import com.antsoft.yecai.mapper.UserRegisterInfoMapper;
 import com.antsoft.yecai.model.User;
+import com.antsoft.yecai.model.UserRegisterInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,9 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserRegisterInfoMapper userRegisterInfoMapper;
 
     public void clear() {
         userMapper.clear();
@@ -33,5 +38,10 @@ public class UserService {
 
     public List<User> findByUserName(String userName) {
         return userMapper.findByUserName(userName);
+    }
+
+    public User getByLoginName(String loginName) {
+        UserRegisterInfo userRegisterInfo = userRegisterInfoMapper.getByLoginName(loginName);
+        return userMapper.getByUserId(userRegisterInfo.getUserId());
     }
 }
