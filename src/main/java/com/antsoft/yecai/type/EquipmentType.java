@@ -11,5 +11,7 @@ public enum EquipmentType {
     EyeWear,
     EarWear,
     Handheld,
-    Pet
+    Pet,
+    Background,
+    Foreground
 }

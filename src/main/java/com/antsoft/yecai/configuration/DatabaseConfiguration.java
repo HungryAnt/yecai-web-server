@@ -49,7 +49,10 @@ public class DatabaseConfiguration {
     public DataSource dataSource() {
         DataSource dataSource;
         if (databaseIsEmbedded) {
-            dataSource = DataSourceUtility.getEmbeddedH2DataSource("classpath:db/yecai_h2.sql");
+            dataSource = DataSourceUtility.getEmbeddedH2DataSource(
+                    "classpath:db/yecai_h2.sql",
+                    "classpath:db/yecai_init_goods.sql"
+            );
         } else {
             dataSource = DataSourceUtility.getTomcatPoolingDataSource(
                     databaseUrl, databaseUsername, databasePassword);
