@@ -71,7 +71,8 @@ public class DatabaseConfiguration {
                 User.class,
                 UserRegisterInfo.class,
                 UserEquipment.class,
-                Goods.class
+                Goods.class,
+                Nutrient.class
         };
 
         sqlSessionFactoryBean.setTypeAliases(types);
@@ -154,5 +155,15 @@ public class DatabaseConfiguration {
     @Bean
     public MapperFactoryBean goodsMapper() {
         return getMapper(GoodsMapper.class);
+    }
+
+    @Bean
+    public MapperFactoryBean shitMineMapper() {
+        return getMapper(ShitMineMapper.class);
+    }
+
+    @Bean
+    public MapperFactoryBean nutrientMapper() {
+        return getMapper(NutrientMapper.class);
     }
 }

@@ -28,6 +28,16 @@ CREATE TABLE `v1_user_rubbishes` (
   UNIQUE KEY `idx_v1_user_rubbishes_user_id_type_id` (`user_id`,`type_id`)
 );
 
+CREATE TABLE `v1_user_nutrients` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `type_id` smallint(6) NOT NULL,
+  `count` int(11) NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_user_id_type_id` (`user_id`,`type_id`)
+);
+
 CREATE TABLE `v1_accounts` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(64) NOT NULL,
@@ -129,4 +139,13 @@ CREATE TABLE `v1_goods` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_v1_goods_key` (`key`),
   KEY `idx_v1_goods_equipment_type` (`equipment_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
+
+CREATE TABLE `v1_shit_mines` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `mine_count` bigint(20) NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_user_id` (`user_id`)
+);

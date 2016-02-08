@@ -41,6 +41,17 @@ CREATE TABLE `v1_user_rubbishes` (
   UNIQUE KEY `idx_user_id_type_id` (`user_id`,`type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `v1_user_nutrients`;
+CREATE TABLE `v1_user_nutrients` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `type_id` smallint(6) NOT NULL,
+  `count` int(11) NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_user_id_type_id` (`user_id`,`type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `v1_cheating_users`;
 CREATE TABLE `v1_cheating_users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -142,4 +153,14 @@ CREATE TABLE `v1_goods` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_key` (`key`),
   KEY `idx_equipment_type` (`equipment_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `v1_shit_mines`;
+CREATE TABLE `v1_shit_mines` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `mine_count` bigint(20) NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

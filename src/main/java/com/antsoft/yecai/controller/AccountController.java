@@ -1,11 +1,14 @@
 package com.antsoft.yecai.controller;
 
+import com.antsoft.yecai.model.RechargeRecord;
 import com.antsoft.yecai.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Created by ant on 2015/9/19.
@@ -32,4 +35,10 @@ public class AccountController {
                          @RequestParam(value = "amount") long amount) {
         accountService.recharge(userId, amount);
     }
+
+    @RequestMapping(value = "/rechargeRecords", method = RequestMethod.GET)
+    public List<RechargeRecord> getRechargeRecords() {
+        return null;
+    }
+
 }

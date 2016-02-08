@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antsoft.yecai.mapper.NutrientMapper">
+    <select id="count" resultType="int">
+        SELECT count(*) FROM v1_user_nutrients
+    </select>
+
+    <delete id="clear">
+        DELETE FROM v1_user_nutrients
+    </delete>
+
+    <select id="getUserNutrientsForUpdate" resultType="Nutrient">
+        SELECT user_id, type_id, `count` FROM v1_user_nutrients
+        WHERE user_id = #{userId} FOR UPDATE
+    </select>
+
+    <update id="updateNutrientCount">
+        UPDATE v1_user_nutrients SET `count` = #{count}
+        WHERE user_id = #{userId} AND type_id = #{typeId}
+    </update>
+</mapper>
