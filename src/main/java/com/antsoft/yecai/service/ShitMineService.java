@@ -37,12 +37,15 @@ public class ShitMineService {
     @Transactional
     public void exchangeShitMines(String userId) {
         List<Nutrient> nutrients = nutrientService.getUserNutrientsForUpdate(userId);
+        if (nutrients.size() != 3) {
+            throw new RuntimeException("exchangeShitMines wrong nutrients count:" + nutrients.size());
+        }
         final int nutrientDecCount = 10;
         final int shitMineCount = 50;
         for (Nutrient nutrient : nutrients) {
             if (nutrient.getCount() < nutrientDecCount) {
                 throw new RuntimeException(
-                        String.format("nutrient count is not enough, userId:%s typeId:%d count:%d",
+                        String.format("exchangeShitMines nutrient count is not enough, userId:%s typeId:%d count:%d",
                                 nutrient.getUserId(), nutrient.getTypeId(), nutrient.getCount()));
             }
             nutrient.setCount(nutrient.getCount() - nutrientDecCount);
