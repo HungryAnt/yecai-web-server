@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.TimeZone;
+
 /**
  * Created by sunlin05 on 2014/12/4.
  */
@@ -16,6 +18,8 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan
 public class Application {
     public static void main(String[] args) {
+        System.setProperty("user.timezone", "UTC");
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         SpringApplication.run(Application.class, args);
     }
 }

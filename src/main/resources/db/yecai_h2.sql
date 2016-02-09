@@ -147,5 +147,15 @@ CREATE TABLE `v1_shit_mines` (
   `mine_count` bigint(20) NOT NULL,
   `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_user_id` (`user_id`)
+  UNIQUE KEY `idx_v1_shit_mines_user_id` (`user_id`)
+);
+
+CREATE TABLE `v1_daily_red_packets` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `amount` bigint(20) NOT NULL,
+  `ctime` datetime NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_v1_daily_red_packets_ctime` (`ctime`)
 );

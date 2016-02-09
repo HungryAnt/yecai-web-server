@@ -164,3 +164,14 @@ CREATE TABLE `v1_shit_mines` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `v1_daily_red_packets`;
+CREATE TABLE `v1_daily_red_packets` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(64) NOT NULL,
+  `amount` bigint(20) NOT NULL,
+  `ctime` datetime NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_ctime` (`ctime`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

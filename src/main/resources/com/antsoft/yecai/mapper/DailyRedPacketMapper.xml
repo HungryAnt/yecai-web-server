@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antsoft.yecai.mapper.DailyRedPacketMapper">
+    <sql id="columns">user_id, amount, ctime</sql>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM v1_daily_red_packets
+    </select>
+
+    <delete id="clear">
+        DELETE FROM v1_daily_red_packets
+    </delete>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO v1_daily_red_packets(<include refid="columns"/>)
+        VALUES(#{userId}, #{amount}, #{ctime, typeHandler=DateTimeTypeHandler})
+    </insert>
+
+    <select id="get" resultMap="dailyRedPacketMap">
+        SELECT id, <include refid="columns"/> FROM v1_daily_red_packets
+        WHERE id = #{id}
+    </select>
+
+    <resultMap id="dailyRedPacketMap" type="DailyRedPacket">
+        <result property="userId" column="user_id" />
+        <result property="ctime" column="ctime" typeHandler="DateTimeTypeHandler" />
+    </resultMap>
+</mapper>
