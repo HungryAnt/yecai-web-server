@@ -157,5 +157,5 @@ CREATE TABLE `v1_daily_red_packets` (
   `ctime` datetime NOT NULL,
   `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_v1_daily_red_packets_ctime` (`ctime`)
+  UNIQUE KEY `idx_v1_daily_red_packets_user_id_ctime` (`user_id`, `ctime`)
 );

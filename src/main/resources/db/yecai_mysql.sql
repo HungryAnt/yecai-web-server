@@ -173,5 +173,5 @@ CREATE TABLE `v1_daily_red_packets` (
   `ctime` datetime NOT NULL,
   `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_ctime` (`ctime`)
+  UNIQUE KEY `idx_user_id_ctime` (`user_id`, `ctime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
