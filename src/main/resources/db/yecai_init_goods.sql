@@ -1,4 +1,3 @@
-SET SQL_SAFE_UPDATES = 0;
 delete from v1_goods;
 insert into v1_goods(equipment_type, `key`, price) values('Vehicle', 'vehicle2_10', 1800);
 insert into v1_goods(equipment_type, `key`, price) values('Vehicle', 'vehicle2_24', 1800);
