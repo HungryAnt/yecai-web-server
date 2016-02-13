@@ -26,7 +26,7 @@
     <select id="getByEquipmentType" resultMap="goodsMap">
         SELECT id, <include refid="columns"/> FROM v1_goods
         WHERE equipment_type = #{equipmentType}
-        ORDER BY id
+        ORDER BY id DESC
         <bind name="offset" value="pageSize * (pageNo - 1)" />
         <bind name="limit" value="pageSize" />
         LIMIT #{offset}, #{limit}
