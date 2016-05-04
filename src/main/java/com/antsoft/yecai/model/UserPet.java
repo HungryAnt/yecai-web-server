@@ -11,4 +11,5 @@ public class UserPet {
     private String petId;
     private String petType;
     private String userId;
+    private Level level;
 }

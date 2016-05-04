@@ -16,6 +16,9 @@ public class UserPetService {
     @Autowired
     private UserPetMapper userPetMapper;
 
+    @Autowired
+    private PetLevelService petLevelService;
+
     public void clear() {
         userPetMapper.clear();
     }
@@ -35,10 +38,16 @@ public class UserPetService {
     }
 
     public UserPet getByPetId(String petId) {
-        return userPetMapper.getByPetId(petId);
+        UserPet userPet = userPetMapper.getByPetId(petId);
+        userPet.setLevel(petLevelService.getLevel(petId));
+        return userPet;
     }
 
     public List<UserPet> getPetsByUserId(String userId) {
-        return userPetMapper.getPetsByUserId(userId);
+        List<UserPet> userPets = userPetMapper.getPetsByUserId(userId);
+        for (UserPet userPet : userPets) {
+            userPet.setLevel(petLevelService.getLevel(userPet.getPetId()));
+        }
+        return userPets;
     }
 }

@@ -64,5 +64,7 @@ public class PetLevelServiceTest {
         Level level = PetLevelService.toLevel(lvTotal);
         assertEquals(expectedLv, level.getLv());
         assertEquals(expectedExpInLv, level.getExpInLv());
+        long expectedMaxExpInLv = expectedLv * PetLevelService.EXP_PER_LV;
+        assertEquals(expectedMaxExpInLv, level.getMaxExpInLv());
     }
 }

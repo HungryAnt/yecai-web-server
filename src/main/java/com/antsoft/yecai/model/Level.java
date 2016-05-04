@@ -9,4 +9,5 @@ import lombok.Data;
 public class Level {
     private long lv;
     private long expInLv;
+    private long maxExpInLv;
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PetLevelService {
+    public static final long EXP_PER_LV = 200;
 
     @Autowired
     private CacheService cacheService;
@@ -36,20 +37,21 @@ public class PetLevelService {
         return "pet_" + petId + "_exp";
     }
 
-    // expPerLv * (lv - 1) * lv / 2 = lvBaseExp
-    // lvBaseExp 稍小于 expTotal
+    // expPerLv * (lv - 1) * lv / 2 = expLvBase
+    // expLvBase 稍小于 expTotal
     public static Level toLevel(long expTotal) {
-        final long expPerLv = 200;
         double a = 1.0;
         double b = -1.0;
-        double c = -2.0 * expTotal / expPerLv;
+        double c = -2.0 * expTotal / EXP_PER_LV;
         final long lv = (long)((-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a));
-        long expLvBase = expPerLv * (lv - 1) * lv / 2;
+        long expLvBase = EXP_PER_LV * (lv - 1) * lv / 2;
         final long expInLv = expTotal - expLvBase;
+        final long maxExpInLv = EXP_PER_LV * lv;
         return new Level() {
             {
                 setLv(lv);
                 setExpInLv(expInLv);
+                setMaxExpInLv(maxExpInLv);
             }
         };
     }
